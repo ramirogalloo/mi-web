@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MULO — Ramiro Gallo</title>
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage:      #C8CFA8;
+    --sage-dark: #8A9467;
+    --sage-deep: #5C6B3A;
+    --forest:    #2D3B1E;
+    --cream:     #F2F0E6;
+    --nebula:    #DDE0C4;
+    --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+    --nav-h:     61px;
+    --marquee-h: 45px;
+  }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + var(--marquee-h)); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--forest); font-family: "Instrument Sans", sans-serif; overflow-x: hidden; }
+  
+  /* ══ NAV ══════════════════════════════════════════════════ */
+  #mainNav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    display: flex; align-items: center;
+    padding: 0 72px;
+    background: #F2F0E6;
+    border-bottom: 1px solid rgba(90,107,58,0.1); height: var(--nav-h);
+  }
+  .nav-logo {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: "Space Mono", monospace; font-size: 16px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; color: var(--sage-deep);
+  }
+  .nav-logo-img {
+    width: 20px; height: 20px; object-fit: contain;
+  }
+  .nav-links { display: flex; gap: 36px; margin-left: auto; }
+  .nav-link {
+    font-family: "Space Mono", monospace; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--forest); opacity: 0.4; text-decoration: none; transition: opacity 0.2s;
+  }
+  .nav-link:hover { opacity: 0.8; }
+  .nav-link.active { opacity: 1; color: var(--sage-deep); }
+
+  /* ══ MARQUEE ══════════════════════════════════════════════ */
+  .marquee-section {
+    position: sticky; top: var(--nav-h); z-index: 200; margin-top: var(--nav-h);
+    width: 100%; height: var(--marquee-h);
+    border-bottom: 1px solid rgba(90,107,58,0.18);
+    background: var(--cream); overflow: hidden; white-space: nowrap;
+  }
+  .marquee-track { display: inline-flex; height: 100%; }
+  .marquee-inner { display: inline-flex; align-items: center; animation: mscroll 40s linear infinite; }
+  @keyframes mscroll { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+  .marquee-item {
+    font-family: "Space Mono", monospace; font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--sage-deep); display: inline-flex; align-items: center;
+  }
+  .msep {
+    display: inline-block; width: 4px; height: 4px;
+    background: var(--sage-dark); border-radius: 50%; margin: 0 24px; flex-shrink: 0;
+  }
+
+  .work-hero { background: var(--forest); padding: 52px 60px 48px; position: relative; overflow: hidden; }
+  .work-hero-bg-num { position: absolute; bottom: -0.05em; right: 40px; font-family: "DM Serif Display", serif; font-size: clamp(140px, 18vw, 240px); color: rgba(200,207,168,0.04); line-height: 1; pointer-events: none; user-select: none; }
+  .work-eyebrow { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 18px; opacity: 0.8; }
+  .work-hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: flex-end; }
+  .work-title { font-family: "DM Serif Display", serif; font-size: clamp(40px, 5vw, 76px); line-height: 0.95; color: var(--cream); }
+  .work-meta { display: flex; flex-direction: column; gap: 18px; }
+  .work-meta-label { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); opacity: 0.6; margin-bottom: 5px; }
+  .work-meta-value { font-size: 13px; color: var(--sage); line-height: 1.5; }
+  .work-meta-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .work-meta-tag { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(200,207,168,0.22); border-radius: 2px; color: var(--sage); opacity: 0.75; }
+
+  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); position: relative; }
+  .work-nav-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s; }
+  .work-nav-link:hover { opacity: 0.6; }
+  .work-nav-back { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; position: absolute; left: 50%; transform: translateX(-50%); }
+  .work-nav-back:hover { opacity: 1; }
+
+  .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
+  .work-cover img { width: 100%; height: auto; display: block; }
+
+  .work-body { padding: 52px 60px 60px; }
+  .work-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(90,107,58,0.12); }
+  .work-statement { font-family: "DM Serif Display", serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.25; color: var(--forest); }
+  .work-statement em { font-style: italic; color: var(--sage-deep); }
+  .work-desc { font-size: 15px; line-height: 1.75; color: var(--forest); opacity: 0.65; }
+  .work-desc p + p { margin-top: 18px; }
+
+  /* gallery */
+  .gallery-label { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 20px; }
+  .gallery-section-label { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin: 40px 0 20px; padding-top: 40px; border-top: 1px solid rgba(90,107,58,0.12); }
+  .gallery-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .gallery-grid-2 img { width: 100%; height: auto; display: block; border-radius: 2px; }
+  .gallery-full { margin-bottom: 10px; }
+  .gallery-full img { width: 100%; height: auto; display: block; border-radius: 2px; }
+
+  /* 5x3 object grid */
+  .gallery-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 10px; }
+
+  /* Object item with hover ficha */
+  .obj-item { position: relative; aspect-ratio: 1; border-radius: 2px; overflow: hidden; cursor: default; }
+  .obj-item img { width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: filter 0.35s ease; }
+  .obj-overlay {
+    position: absolute; inset: 0;
+    background: rgba(200, 207, 168, 0); /* sage base, multiply handled via mix-blend-mode */
+    mix-blend-mode: multiply;
+    transition: background 0.35s ease;
+    pointer-events: none;
+  }
+  .obj-ficha {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(45,59,30,0.45) 0%, transparent 60%);
+  }
+  .obj-ficha-nombre {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 11px; font-weight: 600;
+    color: var(--cream); line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .obj-ficha-autor {
+    font-family: "Space Mono", monospace;
+    font-size: 8px; letter-spacing: 0.08em;
+    color: rgba(242,240,230,0.75); line-height: 1.3;
+  }
+  .obj-ficha-year {
+    font-family: "Space Mono", monospace;
+    font-size: 8px; letter-spacing: 0.08em;
+    color: rgba(242,240,230,0.5);
+  }
+  .obj-item:hover img { filter: blur(2.5px); }
+  .obj-item:hover .obj-overlay { background: rgba(200, 207, 168, 0.72); }
+  .obj-item:hover .obj-ficha { opacity: 1; }
+
+  /* video */
+  .video-wrap {
+    width: 100%;
+    max-height: calc(100vh - var(--nav-h) - var(--marquee-h) - 75px);
+    aspect-ratio: 16/9;
+    border-radius: 2px; overflow: hidden; background: var(--nebula); margin-bottom: 10px;
+  }
+  .video-wrap video { width: 100%; height: 100%; display: block; object-fit: contain; background: var(--nebula); }
+
+  /* gif with site button */
+  .gif-wrap { position: relative; border-radius: 2px; overflow: hidden; }
+  .gif-wrap img { width: 100%; height: auto; display: block; }
+  .proto-link {
+    position: absolute; bottom: 16px; right: 16px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Space Mono", monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 10px 18px;
+    background: var(--cream); color: var(--forest);
+    border: 1px solid rgba(45,59,30,0.25); border-radius: 2px;
+    text-decoration: none; transition: background 0.2s, color 0.2s;
+  }
+  .proto-link:hover { background: var(--forest); color: var(--sage); }
+
+  .back-to-top { display: flex; justify-content: center; padding: 48px 60px 0; border-top: 1px solid rgba(90,107,58,0.12); margin-top: 48px; }
+  .back-to-top a { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); text-decoration: none; opacity: 0.5; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
+  .back-to-top a:hover { opacity: 1; }
+
+  footer { padding: 28px 72px; display: flex; align-items: center; justify-content: space-between; background: var(--forest); }
+  .footer-copy { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-dark); opacity: 0.5; }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-dark); opacity: 0.4; text-decoration: none; transition: opacity 0.2s; }
+  .footer-link:hover { opacity: 0.9; }
+
+  .contact-fab { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 700; display: flex; flex-direction: column; align-items: center; }
+  .contact-panel { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px) scale(0.97); transform-origin: bottom center; background: var(--forest); border: 1px solid rgba(200,207,168,0.15); border-radius: 4px; min-width: 280px; overflow: hidden; opacity: 0; visibility: hidden; transition: opacity 0.28s var(--ease-out), transform 0.28s var(--ease-out), visibility 0s linear 0.28s; }
+  .contact-fab.open .contact-panel { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0) scale(1); transition-delay: 0s; }
+  .panel-header { padding: 14px 20px 10px; border-bottom: 1px solid rgba(200,207,168,0.08); }
+  .panel-title { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); }
+  .panel-row { display: flex; align-items: center; gap: 14px; padding: 13px 20px; border-bottom: 1px solid rgba(200,207,168,0.06); text-decoration: none; transition: background 0.15s; }
+  .panel-row:last-child { border-bottom: none; }
+  .panel-row:hover { background: rgba(200,207,168,0.05); }
+  .panel-row-type { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); width: 60px; flex-shrink: 0; }
+  .panel-row-value { font-size: 13px; color: var(--sage); flex: 1; }
+  .panel-arrow-r { font-size: 12px; color: var(--sage-dark); opacity: 0.5; }
+  .fab-btn { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 28px; background: var(--forest); color: var(--sage); border: 1px solid rgba(200,207,168,0.2); border-radius: 100px; cursor: pointer; white-space: nowrap; box-shadow: 0 4px 28px rgba(0,0,0,0.18); transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s; }
+  .fab-btn:hover { background: var(--sage-deep); border-color: var(--sage); transform: translateY(-2px); }
+  .contact-fab.open .fab-btn { background: var(--sage-deep); border-color: var(--sage); color: var(--cream); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .work-hero { padding: 40px 28px 36px; }
+    .work-hero-grid { grid-template-columns: 1fr; }
+    .work-body { padding: 36px 28px 48px; }
+    .work-intro { grid-template-columns: 1fr; gap: 28px; }
+    .work-nav { padding: 16px 24px; }
+    .gallery-grid-5 { grid-template-columns: repeat(3, 1fr); }
+    footer { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════════ -->
+<nav id="mainNav">
+  <a href="landing-ramiro-gallo.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
+  <div class="nav-links">
+    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+  </div>
+</nav>
+
+<!-- ══ MARQUEE ════════════════════════════════════════════ -->
+<div class="marquee-section">
+  <div class="marquee-track"><div class="marquee-inner">
+    <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
+  </div></div>
+</div>
+
+
+<!-- HERO -->
+<div class="work-hero" id="top">
+  <div class="work-hero-bg-num">05</div>
+  <div class="work-eyebrow">Identidad · Conceptual · Gráfico · 2025</div>
+  <div class="work-hero-grid">
+    <h1 class="work-title">MULO</h1>
+    <div class="work-meta">
+      <div>
+        <div class="work-meta-label">Equipo</div>
+        <div class="work-meta-value">Pedro Benadiba — Nicolás Herrero Anzorena</div>
+      </div>
+      <div>
+        <div class="work-meta-label">Herramientas</div>
+        <div class="work-meta-tags">
+          <span class="work-meta-tag">After Effects</span>
+          <span class="work-meta-tag">Illustrator</span>
+          <span class="work-meta-tag">Photoshop</span>
+        </div>
+      </div>
+      <div>
+        <div class="work-meta-label">Habilidades</div>
+        <div class="work-meta-tags">
+          <span class="work-meta-tag">Gestión Cultural</span>
+          <span class="work-meta-tag">Desarrollo Conceptual</span>
+          <span class="work-meta-tag">Branding</span>
+          <span class="work-meta-tag">Motion Graphics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK NAV -->
+<div class="work-nav">
+  <a href="trabajo-the-monkey.html" class="work-nav-link">← The Monkey</a>
+  <a href="trabajos-ramiro-gallo.html" class="work-nav-back">↑ Todos los trabajos</a>
+  <a href="trabajo-patagon.html" class="work-nav-link">Patagón →</a>
+</div>
+
+<!-- COVER -->
+<div class="work-cover">
+  <img src="assets/mulo/cover.png" alt="MULO — cover">
+</div>
+
+<!-- BODY -->
+<div class="work-body">
+  <div class="work-intro">
+    <div class="work-statement">Provocación, juego, gesto estético, deformaciones. <em>En lugar de ocultar lo artificial, se celebra.</em> La función se vuelve excusa para construir y experimentar con otro lenguaje.</div>
+    <div class="work-desc">
+      <p>Basado en una selección de objetos de diseño argentino que emplean un "juego provocativo", donde se exageran las formas sin perjudicar ni entorpecer la funcionalidad.</p>
+      <p>Ya sea mobiliario con apariencia escultórica, o afiches con predominancia gráfica, la experimentación con la técnica y la morfología siempre está presente.</p>
+      <p>El engaño, la trampa, la transformación, la ilusión, lo que se ve, lo que no.</p>
+    </div>
+  </div>
+
+  <!-- OBJETOS INSPIRACIÓN -->
+  <div class="gallery-label">Objetos inspiración</div>
+  <div class="gallery-grid-5">
+    <div class="obj-item">
+      <img src="assets/mulo/obj/01.png" alt="Silla Plaka">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Silla Plaka</div>
+        <div class="obj-ficha-autor">Ricardo Blanco</div>
+        <div class="obj-ficha-year">1972</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/02.png" alt="Lámpara Olympia Billar">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Lámpara Olympia Billar</div>
+        <div class="obj-ficha-autor">Jorge Pensi</div>
+        <div class="obj-ficha-year">1980s</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/03.png" alt="Silla Ruberta Iron">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Silla Ruberta Iron</div>
+        <div class="obj-ficha-autor">Alejandro Sarmiento</div>
+        <div class="obj-ficha-year">2014</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/04.png" alt="Banco Wave">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Banco Wave</div>
+        <div class="obj-ficha-autor">Fernando Poggio</div>
+        <div class="obj-ficha-year">2000s</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/05.png" alt="Silla Hueso">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Silla Hueso</div>
+        <div class="obj-ficha-autor">Fernando Poggio</div>
+        <div class="obj-ficha-year">2000s</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/06.png" alt="Magiclick">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Magiclick</div>
+        <div class="obj-ficha-autor">Hugo Kohan</div>
+        <div class="obj-ficha-year">1963</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/07.png" alt="Sillón ROLO">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Sillón ROLO</div>
+        <div class="obj-ficha-autor">Reinaldo Leiro y Arnoldo Gaite</div>
+        <div class="obj-ficha-year">1970</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/08.png" alt="Baldosas FCPyS">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Baldosas FCPyS</div>
+        <div class="obj-ficha-autor">Colette Boccara</div>
+        <div class="obj-ficha-year">1965–1970</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/09.png" alt="Lámpara Hanoi">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Lámpara Hanoi</div>
+        <div class="obj-ficha-autor">Federico Churba</div>
+        <div class="obj-ficha-year">2000s</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/10.png" alt="Mesa Stilka">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Mesa Stilka</div>
+        <div class="obj-ficha-autor">Ricardo Gaite y Raúl Leiro</div>
+        <div class="obj-ficha-year">1973</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/11.png" alt="Lámpara Atalaya">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Lámpara Atalaya</div>
+        <div class="obj-ficha-autor">Cristian Mohaded</div>
+        <div class="obj-ficha-year">2022</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/12.png" alt="Ceniceros">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Ceniceros</div>
+        <div class="obj-ficha-autor">Edgardo Giménez</div>
+        <div class="obj-ficha-year">1968</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/13.png" alt="Banqueta Alta">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Banqueta Alta</div>
+        <div class="obj-ficha-autor">Jorge Parsons</div>
+        <div class="obj-ficha-year">1963</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/14.png" alt="Top">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Top</div>
+        <div class="obj-ficha-autor">Jessica Trosman</div>
+        <div class="obj-ficha-year">2012</div>
+      </div>
+    </div>
+    <div class="obj-item">
+      <img src="assets/mulo/obj/15.png" alt="Lámpara Aro de Luz">
+      <div class="obj-overlay"></div>
+      <div class="obj-ficha">
+        <div class="obj-ficha-nombre">Lámpara Aro de Luz</div>
+        <div class="obj-ficha-autor">Edgardo Giménez</div>
+        <div class="obj-ficha-year">1968</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARCA -->
+  <div class="gallery-section-label">Marca</div>
+  <div class="gallery-grid-2">
+    <img src="assets/mulo/logo-grid.png" alt="MULO — grilla de logo">
+    <img src="assets/mulo/paleta.png" alt="MULO — paleta de color">
+  </div>
+
+  <!-- VIDEO TEASER -->
+  <div class="gallery-section-label">Video teaser</div>
+  <div class="video-wrap">
+    <video controls preload="metadata">
+      <source src="assets/mulo/teaser.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ARCHIVO WEB -->
+  <div class="gallery-section-label">Archivo web</div>
+  <div class="gif-wrap">
+    <img src="assets/mulo/web.gif" alt="MULO — sitio web">
+    <a href="https://ramirogalloo.github.io/MULO/" target="_blank" class="proto-link">Ver sitio ↗</a>
+  </div>
+
+  <div class="back-to-top">
+    <a href="#top">↑ Volver al inicio</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-copy">Ramiro Gallo · Buenos Aires, Argentina</span>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Instagram</a>
+    <a href="#" class="footer-link">LinkedIn</a>
+    <a href="#" class="footer-link">Behance</a>
+  </div>
+</footer>
+
+<div class="contact-fab" id="contactFab">
+  <div class="contact-panel">
+    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <a href="/cdn-cgi/l/email-protection#abd9cac6c2d9c485cccac7c7c4ebccc6cac2c785c8c4c6" class="panel-row">
+      <span class="panel-row-type">Correo</span><span class="panel-row-value"><span class="__cf_email__" data-cfemail="7103101c18031e5f16101d1d1e31161c10181d5f121e1c">[email&#160;protected]</span></span><span class="panel-arrow-r">→</span>
+    </a>
+    <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
+      <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow-r">→</span>
+    </a>
+  </div>
+  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+document.querySelectorAll('a[href="#top"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+const fab = document.getElementById('contactFab');
+con
