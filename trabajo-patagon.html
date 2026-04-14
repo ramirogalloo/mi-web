@@ -237,7 +237,7 @@
   .panel-row:hover { background: rgba(200,207,168,0.05); }
   .panel-row-type { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); width: 60px; flex-shrink: 0; }
   .panel-row-value { font-size: 13px; color: var(--sage); flex: 1; }
-  .panel-arrow-r { font-size: 12px; color: var(--sage-dark); opacity: 0.5; }
+  .panel-arrow { font-size: 12px; color: var(--sage-dark); opacity: 0.5; }
   .fab-btn {
     font-family: "Space Mono", monospace; font-size: 10px;
     letter-spacing: 0.14em; text-transform: uppercase;
@@ -375,26 +375,25 @@
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
     <div class="panel-header"><div class="panel-title">Contacto</div></div>
-    <a href="/cdn-cgi/l/email-protection#3f4d5e52564d5011585e5353507f58525e5653115c5052" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value"><span class="__cf_email__" data-cfemail="9ceefdf1f5eef3b2fbfdf0f0f3dcfbf1fdf5f0b2fff3f1">[email&#160;protected]</span></span><span class="panel-arrow-r">→</span>
+    <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
+      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
-      <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow-r">→</span>
+      <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
+    </a>
+    <a href="tel:+5491136318967" class="panel-row">
+      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
   <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+<script>
 const fab = document.getElementById('contactFab');
 const fabBtn = document.getElementById('fabBtn');
 fabBtn.addEventListener('click', e => { e.stopPropagation(); fab.classList.toggle('open'); });
 document.addEventListener('click', e => { if (!fab.contains(e.target)) fab.classList.remove('open'); });
-
-function smoothScrollTop(btn) {
-  btn.classList.add('scrolling');
-  btn.addEventListener('animationend', () => btn.classList.remove('scrolling'), { once: true });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fab.classList.remove('open'); });
 
 document.querySelectorAll('a[href="#top"]').forEach(a => {
   a.addEventListener('click', e => {
