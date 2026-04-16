@@ -94,12 +94,12 @@
   .hero-photo img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover; object-position: bottom; display: block;
+    object-fit: cover; object-position: center bottom; display: block;
   }
   .hero-photo::after {
     content: "";
-    position: absolute; left: 0; right: 0; bottom: 0; height: 45%;
-    background: linear-gradient(to top, rgba(45,59,30,0.62) 0%, transparent 100%);
+    position: absolute; left: 0; right: 0; top: 0; height: 55%;
+    background: linear-gradient(to bottom, rgba(242,240,230,0.75) 0%, transparent 100%);
     pointer-events: none;
   }
   .hero-photo-name {
@@ -109,7 +109,7 @@
   .hero-photo-name .name-eyebrow {
     font-family: "Space Mono", monospace; font-size: 9px;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--sage-deep); opacity: 0.7; margin-bottom: 5px;
+    color: var(--sage-dark); opacity: 0.7; margin-bottom: 5px;
   }
   .hero-photo-name .name-main {
     font-family: "DM Serif Display", serif; font-size: 28px;
@@ -318,6 +318,119 @@
   }
   .contact-fab.open .fab-btn {
     background: var(--sage-deep); border-color: var(--sage); color: var(--cream);
+  }
+
+  /* ══ MOBILE ══════════════════════════════════════════════════
+     breakpoint: 768px
+  ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* — Nav — */
+    #mainNav {
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-size: 13px;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    /* — Marquee — */
+    .marquee-item {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+    }
+    .msep { margin: 0 14px; }
+
+    /* — Hero — */
+    .hero {
+      grid-template-columns: 1fr;
+      grid-template-rows: 62vh auto;
+      height: auto;
+      min-height: unset;
+    }
+    .hero-photo {
+      height: 62vh;
+    }
+    .hero-photo img {
+      object-position: center bottom;
+    }
+    .hero-text {
+      padding: 40px 20px 48px;
+      gap: 24px;
+      height: auto;
+    }
+    .hero-quote {
+      font-size: clamp(22px, 6.5vw, 34px);
+    }
+    .hero-bio p {
+      font-size: 14px;
+    }
+
+    /* — Formación — */
+    .formation-section {
+      grid-template-columns: 1fr;
+      padding: 48px 20px;
+      gap: 32px 0;
+    }
+    .formation-section .section-label {
+      position: static;
+    }
+    .formation-item {
+      padding: 28px 0;
+    }
+    .formation-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .formation-years {
+      font-size: 9px;
+    }
+    .formation-sub {
+      margin-left: 0;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    /* — Habilidades — */
+    .skills-section {
+      grid-template-columns: 1fr;
+      padding: 48px 20px;
+      gap: 32px 0;
+    }
+    .skills-section .section-label {
+      position: static;
+    }
+    .skills-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    /* — Footer — */
+    footer {
+      padding: 24px 20px;
+    }
+
+    /* — FAB — */
+    .fab-btn {
+      font-size: 9px;
+      padding: 12px 22px;
+    }
+
+    /* — Sin hover en mobile (evita estados stuck post-tap) — */
+    .nav-link:hover { opacity: 0.4; }
+    .skill-tag:hover { background: transparent; border-color: rgba(45,59,30,0.14); }
+    .skill-tag.dim:hover { color: var(--sage-deep); border-color: rgba(45,59,30,0.14); }
+    .lang-item:hover { background: transparent; }
+    .panel-row:hover { background: transparent; }
+    .fab-btn:hover { background: var(--forest); border-color: rgba(200,207,168,0.2); color: var(--sage); transform: none; box-shadow: 0 4px 28px rgba(0,0,0,0.18); }
+    .contact-fab.open .fab-btn { background: var(--sage-deep); border-color: var(--sage); color: var(--cream); }
+    .footer-nav a:hover { opacity: 0.4; }
   }
 </style>
 </head>

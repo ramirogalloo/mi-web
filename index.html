@@ -493,6 +493,205 @@
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.32s; }
+
+  /* ══ MOBILE ══════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* ── NAV ── */
+    #mainNav {
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-size: 13px;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-item {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+    }
+    .msep { margin: 0 14px; }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      min-height: 0;
+      padding-bottom: 56px;
+    }
+    /* Reorder: index → h1 → photo → descriptor → cta → tags */
+    .hero-left {
+      display: contents; /* deshacemos el flex column del left para reordenar */
+    }
+    .hero-index {
+      order: 1;
+      padding: 40px 20px 0;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s var(--ease-out) 0.05s both;
+    }
+    .hero-h1 {
+      order: 2;
+      padding: 0 20px;
+      font-size: clamp(40px, 12vw, 60px);
+      margin-bottom: 0;
+      animation: fadeUp 0.8s var(--ease-out) 0.15s both;
+    }
+    .hero-right {
+      order: 3;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      height: auto;
+      margin: 20px 0 0;
+      position: relative;
+    }
+    /* Fade hacia arriba — la imagen se funde con el título */
+    .hero-right::after {
+      background: linear-gradient(to top, transparent 85%, var(--cream) 100%);
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-out) 0.3s both;
+    }
+    .hero-descriptor {
+      order: 4;
+      padding: 24px 20px 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.28s both;
+    }
+    .hero-descriptor p {
+      font-size: 14px;
+      max-width: 100%;
+    }
+    .hero-cta {
+      order: 5;
+      margin-top: 28px;
+      margin-left: 20px;
+      width: fit-content;
+      animation: fadeUp 0.7s var(--ease-out) 0.38s both;
+    }
+    .hero-tags { display: none; }
+    .hero-top-label { display: none; }
+
+    /* ── Sin hover en mobile (evita estados stuck post-tap) ── */
+    .nav-link:hover { opacity: 0.4; }
+    .hero-cta:hover { color: var(--sage-deep); border-color: rgba(90,107,58,0.3); gap: 14px; }
+    .hero-tag:hover { background: transparent; }
+    .c-card:hover { border-color: rgba(90,107,58,0.18); }
+    .c-card:hover .c-img-fill { transform: none; }
+    .c-card:hover .c-title-row { color: var(--forest); }
+    .c-card:hover .c-title-arrow { transform: none; }
+    .carousel-nav:hover { background: var(--forest); border-color: rgba(200,207,168,0.2); }
+    .contact-info-row:hover { background: transparent; }
+    .contact-submit:hover { background: var(--forest); transform: none; }
+    .section-link:hover { color: var(--sage-deep); border-color: rgba(90,107,58,0.25); }
+    .fab-btn:hover { background: var(--forest); border-color: rgba(200,207,168,0.2); color: var(--sage); transform: none; box-shadow: 0 4px 28px rgba(0,0,0,0.25); }
+    .contact-fab.open .fab-btn { background: var(--forest); border-color: rgba(200,207,168,0.2); color: var(--sage); }
+    .panel-row:hover { background: transparent; }
+    .footer-nav a:hover { opacity: 0.4; }
+
+    /* ── WORKS — CARRUSEL MOBILE ── */
+    .works-section {
+      padding: 48px 0 32px;
+      min-height: 0;
+    }
+    .works-header {
+      padding: 0 20px;
+      margin-bottom: 36px;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .section-title {
+      font-size: clamp(36px, 10vw, 48px);
+    }
+
+    /* Ocultar flechas — solo swipe + dots en mobile */
+    .carousel-nav { display: none; }
+
+    /* Stage ocupa el ancho de pantalla con padding lateral */
+    .carousel-outer {
+      padding: 0 20px;
+    }
+    .carousel-stage {
+      width: 100%;
+      height: 72vw;
+      max-height: 420px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Una sola card ocupa todo el stage */
+    .c-card {
+      border-radius: 3px;
+      transition:
+        left    var(--car-trans) var(--ease-out),
+        opacity var(--car-trans) var(--ease-out);
+    }
+
+    /* Dots más grandes para touch */
+    .carousel-dots {
+      padding: 0 20px;
+      margin-top: 20px;
+    }
+    .carousel-dot { width: 20px; height: 3px; }
+    .carousel-dot.active { width: 36px; }
+
+    /* ── CONTACTO ── */
+    .contact-section {
+      padding: 56px 20px 48px;
+      min-height: 0;
+    }
+    .contact-h2 {
+      font-size: clamp(38px, 10vw, 56px);
+      margin-bottom: 36px;
+    }
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .contact-form-row {
+      flex-direction: column;
+      gap: 0;
+    }
+    .contact-field.half { margin-bottom: 16px; }
+    .contact-info-value { font-size: 13px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 24px 20px;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .footer-nav { gap: 20px; }
+
+    /* ── FAB ── */
+    .fab-btn {
+      font-size: 9px;
+      padding: 12px 22px;
+    }
+    .contact-panel { min-width: 240px; }
+  }
+
+  /* ── Pantallas muy chicas ── */
+  @media (max-width: 375px) {
+    .hero-h1 { font-size: 38px; }
+    .contact-h2 { font-size: 34px; }
+    .section-title { font-size: 34px; }
+  }
 </style>
 </head>
 <body>
@@ -522,7 +721,7 @@
       Soy Ramiro.
     </h1>
     <div class="hero-descriptor">
-      <p>Diseñador multidisciplinario basado en Buenos Aires. Me interesan lo audiovisual, la edición, el diseño sonoro y el diseño de producto — y disfruto cada vez que esos mundos se cruzan.</p>
+      <p><strong>Diseñador multidisciplinario basado en Buenos Aires.</strong> <br> Me interesan lo audiovisual, la edición, el diseño sonoro y el diseño de producto — y disfruto cada vez que esos mundos se cruzan.</p>
     </div>
     <a href="about-ramiro-gallo.html" class="hero-cta">Conocerme mejor →</a>
     <div class="hero-tags">
@@ -721,25 +920,44 @@ if (contactSec) {
   ];
   const N = PROJECTS.length;
 
-  /* ── MEDIDAS (de DOM real medido) ──────────────────────── */
+  /* ── DETECCIÓN MOBILE ─────────────────────────────────── */
+  const IS_MOBILE = window.innerWidth <= 768;
+
+  /* ── MEDIDAS ───────────────────────────────────────────── */
   const cs    = getComputedStyle(document.documentElement);
-  const GAP   = parseInt(cs.getPropertyValue('--car-gap'))   || 12;
-  const ADJ_W = parseInt(cs.getPropertyValue('--car-adj-w')) || 240;
-  const ACT_W = parseInt(cs.getPropertyValue('--car-act-w')) || 480;
-  const CAR_H = parseInt(cs.getPropertyValue('--car-h'))     || 520;
   const TRANS = Math.round((parseFloat(cs.getPropertyValue('--car-trans')) || 0.95) * 1000);
 
-  const ADJ_H   = Math.round(CAR_H * 0.55);  /* 286px */
-  const ADJ_TOP = Math.round((CAR_H - ADJ_H) / 2); /* 117px */
+  let GAP, ADJ_W, ACT_W, CAR_H, ADJ_H, ADJ_TOP;
+  let X_PREV, X_ACT, X_NEXT, X_OUT_LEFT, X_OUT_RIGHT;
 
-  /* Posiciones X de cada slot */
-  const X_PREV = 0;
-  const X_ACT  = ADJ_W + GAP;           /* 252 */
-  const X_NEXT = ADJ_W + GAP + ACT_W + GAP; /* 744 */
-
-  /* Posición de salida: fuera del stage por cada lado */
-  const X_OUT_LEFT  = -(ADJ_W + GAP);   /* -252 */
-  const X_OUT_RIGHT = X_NEXT + ADJ_W + GAP; /* 984+12 */
+  function computeGeometry() {
+    const stageEl = document.getElementById('carouselStage');
+    if (IS_MOBILE) {
+      ACT_W = stageEl.offsetWidth;
+      CAR_H = stageEl.offsetHeight;
+      GAP   = 16;
+      ADJ_W = 0;
+      ADJ_H   = CAR_H;
+      ADJ_TOP = 0;
+      X_PREV      = -(ACT_W + GAP);
+      X_ACT       = 0;
+      X_NEXT      = ACT_W + GAP;
+      X_OUT_LEFT  = -(ACT_W + GAP);
+      X_OUT_RIGHT = ACT_W + GAP;
+    } else {
+      GAP   = parseInt(cs.getPropertyValue('--car-gap'))   || 12;
+      ADJ_W = parseInt(cs.getPropertyValue('--car-adj-w')) || 240;
+      ACT_W = parseInt(cs.getPropertyValue('--car-act-w')) || 480;
+      CAR_H = parseInt(cs.getPropertyValue('--car-h'))     || 520;
+      ADJ_H   = Math.round(CAR_H * 0.55);
+      ADJ_TOP = Math.round((CAR_H - ADJ_H) / 2);
+      X_PREV      = 0;
+      X_ACT       = ADJ_W + GAP;
+      X_NEXT      = ADJ_W + GAP + ACT_W + GAP;
+      X_OUT_LEFT  = -(ADJ_W + GAP);
+      X_OUT_RIGHT = X_NEXT + ADJ_W + GAP;
+    }
+  }
 
   const EASE = 'cubic-bezier(0.16,1,0.3,1)';
 
@@ -782,11 +1000,11 @@ if (contactSec) {
       applyGeo(el, X_ACT, 0, ACT_W, CAR_H);
       el.style.opacity = '1';
     } else if (role === 'prev') {
-      applyGeo(el, X_PREV, ADJ_TOP, ADJ_W, ADJ_H);
-      el.style.opacity = '0.65';
+      applyGeo(el, X_PREV, ADJ_TOP, IS_MOBILE ? ACT_W : ADJ_W, ADJ_H);
+      el.style.opacity = IS_MOBILE ? '0' : '0.65';
     } else {
-      applyGeo(el, X_NEXT, ADJ_TOP, ADJ_W, ADJ_H);
-      el.style.opacity = '0.65';
+      applyGeo(el, X_NEXT, ADJ_TOP, IS_MOBILE ? ACT_W : ADJ_W, ADJ_H);
+      el.style.opacity = IS_MOBILE ? '0' : '0.65';
     }
 
     /* Imagen */
@@ -898,13 +1116,11 @@ if (contactSec) {
     let newCard;
     if (dir === 1) {
       newCard = buildCard(proj(1), 'next');
-      /* Empieza fuera del stage por la derecha */
-      applyGeo(newCard, X_OUT_RIGHT, ADJ_TOP, ADJ_W, ADJ_H);
+      applyGeo(newCard, X_OUT_RIGHT, IS_MOBILE ? 0 : ADJ_TOP, IS_MOBILE ? ACT_W : ADJ_W, IS_MOBILE ? CAR_H : ADJ_H);
       newCard.style.opacity = '0';
     } else {
       newCard = buildCard(proj(-1), 'prev');
-      /* Empieza fuera del stage por la izquierda */
-      applyGeo(newCard, X_OUT_LEFT, ADJ_TOP, ADJ_W, ADJ_H);
+      applyGeo(newCard, X_OUT_LEFT, IS_MOBILE ? 0 : ADJ_TOP, IS_MOBILE ? ACT_W : ADJ_W, IS_MOBILE ? CAR_H : ADJ_H);
       newCard.style.opacity = '0';
     }
     newCard.style.transition = 'none';
@@ -922,12 +1138,17 @@ if (contactSec) {
       cardPrev.style.left    = X_OUT_LEFT + 'px';
       cardPrev.style.opacity = '0';
 
-      /* cardAct va a posición prev (se achica) */
+      /* cardAct va a posición prev */
       cardAct.classList.add('adj');
-      applyGeo(cardAct, X_PREV, ADJ_TOP, ADJ_W, ADJ_H);
-      cardAct.style.opacity = '0.65';
+      if (IS_MOBILE) {
+        applyGeo(cardAct, X_OUT_LEFT, 0, ACT_W, CAR_H);
+        cardAct.style.opacity = '0';
+      } else {
+        applyGeo(cardAct, X_PREV, ADJ_TOP, ADJ_W, ADJ_H);
+        cardAct.style.opacity = '0.65';
+      }
 
-      /* cardNext va a posición activa (se agranda) */
+      /* cardNext va a posición activa */
       cardNext.classList.remove('adj');
       applyGeo(cardNext, X_ACT, 0, ACT_W, CAR_H);
       cardNext.style.opacity = '1';
@@ -947,20 +1168,30 @@ if (contactSec) {
       }, Math.round(TRANS * 0.55));
 
       /* newCard entra como next */
-      applyGeo(newCard, X_NEXT, ADJ_TOP, ADJ_W, ADJ_H);
-      newCard.style.opacity = '0.65';
+      if (IS_MOBILE) {
+        applyGeo(newCard, X_NEXT, 0, ACT_W, CAR_H);
+        newCard.style.opacity = '0';
+      } else {
+        applyGeo(newCard, X_NEXT, ADJ_TOP, ADJ_W, ADJ_H);
+        newCard.style.opacity = '0.65';
+      }
 
     } else {
       /* cardNext sale por la derecha */
       cardNext.style.left    = X_OUT_RIGHT + 'px';
       cardNext.style.opacity = '0';
 
-      /* cardAct va a posición next (se achica) */
+      /* cardAct va a posición next */
       cardAct.classList.add('adj');
-      applyGeo(cardAct, X_NEXT, ADJ_TOP, ADJ_W, ADJ_H);
-      cardAct.style.opacity = '0.65';
+      if (IS_MOBILE) {
+        applyGeo(cardAct, X_OUT_RIGHT, 0, ACT_W, CAR_H);
+        cardAct.style.opacity = '0';
+      } else {
+        applyGeo(cardAct, X_NEXT, ADJ_TOP, ADJ_W, ADJ_H);
+        cardAct.style.opacity = '0.65';
+      }
 
-      /* cardPrev va a posición activa (se agranda) */
+      /* cardPrev va a posición activa */
       cardPrev.classList.remove('adj');
       applyGeo(cardPrev, X_ACT, 0, ACT_W, CAR_H);
       cardPrev.style.opacity = '1';
@@ -978,8 +1209,13 @@ if (contactSec) {
       }, Math.round(TRANS * 0.55));
 
       /* newCard entra como prev */
-      applyGeo(newCard, X_PREV, ADJ_TOP, ADJ_W, ADJ_H);
-      newCard.style.opacity = '0.65';
+      if (IS_MOBILE) {
+        applyGeo(newCard, X_PREV, 0, ACT_W, CAR_H);
+        newCard.style.opacity = '0';
+      } else {
+        applyGeo(newCard, X_PREV, ADJ_TOP, ADJ_W, ADJ_H);
+        newCard.style.opacity = '0.65';
+      }
     }
 
     /* Limpiar y reconstruir DOM limpio al terminar */
@@ -1027,6 +1263,7 @@ if (contactSec) {
   }, { passive: true });
 
   /* ── ARRANQUE ───────────────────────────────────────────── */
+  computeGeometry();
   renderClean();
   startAuto();
 

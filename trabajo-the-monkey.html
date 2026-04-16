@@ -70,6 +70,8 @@
 
   .work-hero { background: var(--forest); padding: 52px 60px 48px; position: relative; overflow: hidden; }
   .work-hero-bg-num { position: absolute; bottom: -0.05em; right: 40px; font-family: "DM Serif Display", serif; font-size: clamp(140px, 18vw, 240px); color: rgba(200,207,168,0.04); line-height: 1; pointer-events: none; user-select: none; }
+  .work-back { display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
+  .work-back:hover { opacity: 1; }
   .work-eyebrow { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 18px; opacity: 0.8; }
   .work-hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: flex-end; }
   .work-title { font-family: "DM Serif Display", serif; font-size: clamp(40px, 5vw, 76px); line-height: 0.95; color: var(--cream); }
@@ -79,11 +81,9 @@
   .work-meta-tags { display: flex; gap: 5px; flex-wrap: wrap; }
   .work-meta-tag { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(200,207,168,0.22); border-radius: 2px; color: var(--sage); opacity: 0.75; }
 
-  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); position: relative; }
+  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
   .work-nav-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s; }
   .work-nav-link:hover { opacity: 0.6; }
-  .work-nav-back { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; position: absolute; left: 50%; transform: translateX(-50%); }
-  .work-nav-back:hover { opacity: 1; }
 
   .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
   .work-cover img { width: 100%; height: auto; display: block; }
@@ -137,14 +137,124 @@
   .fab-btn:hover { background: var(--sage-deep); border-color: var(--sage); transform: translateY(-2px); }
   .contact-fab.open .fab-btn { background: var(--sage-deep); border-color: var(--sage); color: var(--cream); }
 
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .work-hero { padding: 40px 28px 36px; }
-    .work-hero-grid { grid-template-columns: 1fr; }
-    .work-body { padding: 36px 28px 48px; }
-    .work-intro { grid-template-columns: 1fr; gap: 28px; }
-    .work-nav { padding: 16px 24px; }
-    footer { padding: 28px 24px; }
+  @media (max-width: 768px) {
+
+    /* — Nav — */
+    #mainNav {
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-size: 13px;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    /* — Marquee — */
+    .marquee-item {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+    }
+    .msep { margin: 0 14px; }
+
+    /* — Hero — */
+    .work-hero {
+      padding: 40px 20px 36px;
+    }
+    .work-hero-bg-num {
+      font-size: clamp(120px, 34vw, 180px);
+      right: 16px;
+    }
+    .work-back {
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+    }
+    .work-eyebrow {
+      margin-bottom: 14px;
+    }
+    .work-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .work-title {
+      font-size: clamp(38px, 11vw, 56px);
+    }
+    .work-meta {
+      gap: 14px;
+    }
+    .work-meta-value {
+      font-size: 13px;
+    }
+
+    /* — Work nav (prev / next) — */
+    .work-nav {
+      padding: 14px 20px;
+    }
+    .work-nav-link {
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      gap: 8px;
+    }
+
+    /* — Body — */
+    .work-body {
+      padding: 36px 20px 48px;
+    }
+    .work-intro {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+      padding-bottom: 36px;
+    }
+    .work-statement {
+      font-size: clamp(20px, 5.5vw, 26px);
+    }
+    .work-desc {
+      font-size: 14px;
+    }
+    .work-desc p + p {
+      margin-top: 14px;
+    }
+
+    /* — Video placeholder — */
+    .video-placeholder span {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+    }
+
+    /* — Back to top — */
+    .back-to-top {
+      padding: 36px 20px 0;
+      margin-top: 36px;
+    }
+
+    /* — Footer — */
+    footer {
+      padding: 24px 20px;
+    }
+
+    /* — FAB — */
+    .fab-btn {
+      font-size: 9px;
+      padding: 12px 22px;
+    }
+    .contact-panel {
+      min-width: 240px;
+    }
+
+    /* — Sin hover en mobile (evita estados stuck post-tap) — */
+    .nav-link:hover { opacity: 0.4; }
+    .work-nav-link:hover { opacity: 1; }
+    .work-back:hover { opacity: 0.7; }
+    .back-to-top a:hover { opacity: 0.5; }
+    .panel-row:hover { background: transparent; }
+    .fab-btn:hover { background: var(--forest); border-color: rgba(200,207,168,0.2); color: var(--sage); transform: none; box-shadow: 0 4px 28px rgba(0,0,0,0.18); }
+    .contact-fab.open .fab-btn { background: var(--sage-deep); border-color: var(--sage); color: var(--cream); }
   }
 </style>
 </head>
@@ -170,6 +280,7 @@
 <!-- HERO -->
 <div class="work-hero" id="top">
   <div class="work-hero-bg-num">04</div>
+  <a href="trabajos-ramiro-gallo.html" class="work-back">↑ Todos los trabajos</a>
   <div class="work-eyebrow">Sonoro · Audiovisual · 2025</div>
   <div class="work-hero-grid">
     <h1 class="work-title">The Monkey</h1>
@@ -201,7 +312,6 @@
 <!-- WORK NAV -->
 <div class="work-nav">
   <a href="trabajo-ritual-divino.html" class="work-nav-link">← Ritual divino</a>
-  <a href="trabajos-ramiro-gallo.html" class="work-nav-back">↑ Todos los trabajos</a>
   <a href="trabajo-mulo.html" class="work-nav-link">MULO →</a>
 </div>
 

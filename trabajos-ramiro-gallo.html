@@ -265,15 +265,100 @@
   .anim-d2 { animation-delay: 0.22s; }
   .anim-d3 { animation-delay: 0.34s; }
 
-  /* ══ RESPONSIVE ══ */
-  @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .section-header, .filters, footer { padding-left: 24px; padding-right: 24px; }
-    .grid-wrapper { padding: 48px 24px 80px; }
-    .projects-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-  }
-  @media (max-width: 580px) {
-    .projects-grid { grid-template-columns: 1fr; gap: 12px; }
+  /* ══ RESPONSIVE ══════════════════════════════════════════════
+     768px — mobile: 2 columnas, elementos constantes sincronizados
+  ══════════════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* — Nav — */
+    #mainNav {
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-size: 13px;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+    .nav-link {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    /* — Marquee — */
+    .marquee-item {
+      font-size: 8px;
+      letter-spacing: 0.14em;
+    }
+    .msep { margin: 0 14px; }
+
+    /* — Section header — */
+    .section-header {
+      padding: 48px 20px 36px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: clamp(36px, 10vw, 52px);
+    }
+    .section-count {
+      padding-bottom: 0;
+    }
+
+    /* — Filtros — */
+    .filters {
+      padding: 16px 20px;
+      gap: 6px;
+    }
+    .filter-btn {
+      font-size: 8px;
+      padding: 6px 12px;
+    }
+
+    /* — Grilla: 1 columna — */
+    .grid-wrapper {
+      padding: 24px 20px 72px;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    /* — Cards full width: imagen 16/9, tipografía normal — */
+    .card-img-wrap {
+      aspect-ratio: 16 / 9;
+    }
+    .card-info {
+      padding: 16px 20px 20px;
+    }
+    .card-title {
+      font-size: clamp(20px, 5vw, 26px);
+    }
+
+    /* — Footer — */
+    footer {
+      padding: 28px 20px;
+    }
+
+    /* — FAB — */
+    .fab-btn {
+      font-size: 9px;
+      padding: 12px 22px;
+    }
+
+    /* — Sin hover en mobile (evita estados stuck post-tap) — */
+    .nav-link:hover { opacity: 0.4; }
+    .filter-btn:hover { background: transparent; color: var(--sage-deep); border-color: rgba(90,107,58,0.28); }
+    .filter-btn.active:hover { background: var(--sage-deep); color: var(--sage); border-color: var(--sage-dark); }
+    .proj-card:hover { background: var(--cream); border-color: rgba(90,107,58,0.18); box-shadow: none; }
+    .proj-card:hover .card-img { transform: none; }
+    .proj-card:hover .card-title { color: var(--forest); }
+    .proj-card:hover .card-arrow { transform: none; }
+    .panel-row:hover { background: transparent; }
+    .fab-btn:hover { background: var(--forest); border-color: rgba(200,207,168,0.2); color: var(--sage); transform: none; box-shadow: 0 4px 28px rgba(0,0,0,0.18); }
+    .contact-fab.open .fab-btn { background: var(--sage-deep); border-color: var(--sage); color: var(--cream); }
+    .footer-link:hover { opacity: 0.4; }
   }
 </style>
 </head>
