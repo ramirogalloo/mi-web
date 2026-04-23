@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Post Mortem — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -47,6 +48,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -70,7 +82,7 @@
 
   .work-hero { background: var(--forest); padding: 52px 60px 48px; position: relative; overflow: hidden; }
   .work-hero-bg-num { position: absolute; bottom: -0.05em; right: 40px; font-family: "DM Serif Display", serif; font-size: clamp(140px, 18vw, 240px); color: rgba(200,207,168,0.04); line-height: 1; pointer-events: none; user-select: none; }
-  .work-back { display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
+  .work-back { display: none; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
   .work-back:hover { opacity: 1; }
   .work-eyebrow { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 18px; opacity: 0.8; }
   .work-hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: flex-end; }
@@ -80,10 +92,13 @@
   .work-meta-value { font-size: 13px; color: var(--sage); line-height: 1.5; }
   .work-meta-tags { display: flex; gap: 5px; flex-wrap: wrap; }
   .work-meta-tag { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(200,207,168,0.22); border-radius: 2px; color: var(--sage); opacity: 0.75; }
+  .work-meta-placeholder { visibility: hidden; }
 
-  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
+  .work-nav { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
   .work-nav-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s; }
   .work-nav-link:hover { opacity: 0.6; }
+  .work-nav-back { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+  .work-nav-back:hover { opacity: 1; }
 
   .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
   .work-cover img { width: 100%; height: auto; display: block; }
@@ -176,10 +191,12 @@
       right: 16px;
     }
     .work-back {
+      display: inline-flex;
       font-size: 8px;
       letter-spacing: 0.12em;
       margin-bottom: 18px;
     }
+    .work-nav-back { display: none; }
     .work-eyebrow {
       margin-bottom: 14px;
     }
@@ -193,6 +210,7 @@
     .work-meta {
       gap: 14px;
     }
+    .work-meta-placeholder { display: none; }
     .work-meta-value {
       font-size: 13px;
     }
@@ -281,14 +299,19 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -296,13 +319,17 @@
 <!-- HERO — sin equipo -->
 <div class="work-hero" id="top">
   <div class="work-hero-bg-num">02</div>
-  <a href="trabajos-ramiro-gallo.html" class="work-back">↑ Todos los trabajos</a>
-  <div class="work-eyebrow">Conceptual · Gráfico · Identidad · 2024</div>
+  <a href="trabajos-ramiro-gallo.html" class="work-back" data-i18n="work.back">↑ Todos los trabajos</a>
+  <div class="work-eyebrow" data-i18n="postmortem.eyebrow">Conceptual · Gráfico · Identidad · 2024</div>
   <div class="work-hero-grid">
     <h1 class="work-title">Post Mortem</h1>
     <div class="work-meta">
+      <div class="work-meta-placeholder">
+        <div class="work-meta-label" data-i18n="work.meta.team">Equipo</div>
+        <div class="work-meta-value">&nbsp;</div>
+      </div>
       <div>
-        <div class="work-meta-label">Herramientas</div>
+        <div class="work-meta-label" data-i18n="work.meta.tools">Herramientas</div>
         <div class="work-meta-tags">
           <span class="work-meta-tag">Illustrator</span>
           <span class="work-meta-tag">Photoshop</span>
@@ -310,13 +337,13 @@
         </div>
       </div>
       <div>
-        <div class="work-meta-label">Habilidades</div>
+        <div class="work-meta-label" data-i18n="work.meta.skills">Habilidades</div>
         <div class="work-meta-tags">
-          <span class="work-meta-tag">Ilustración</span>
-          <span class="work-meta-tag">Desarrollo conceptual</span>
-          <span class="work-meta-tag">Narrativa</span>
-          <span class="work-meta-tag">Experiencia de usuario</span>
-          <span class="work-meta-tag">Prototipado web</span>
+          <span class="work-meta-tag" data-i18n="postmortem.skill.1">Ilustración</span>
+          <span class="work-meta-tag" data-i18n="postmortem.skill.2">Desarrollo conceptual</span>
+          <span class="work-meta-tag" data-i18n="postmortem.skill.3">Narrativa</span>
+          <span class="work-meta-tag" data-i18n="postmortem.skill.4">Experiencia de usuario</span>
+          <span class="work-meta-tag" data-i18n="postmortem.skill.5">Prototipado web</span>
         </div>
       </div>
     </div>
@@ -326,6 +353,7 @@
 <!-- WORK NAV -->
 <div class="work-nav">
   <a href="trabajo-patagon.html" class="work-nav-link">← Patagón</a>
+  <a href="trabajos-ramiro-gallo.html" class="work-nav-back" data-i18n="work.nav.back">↑ Todos los trabajos</a>
   <a href="trabajo-ritual-divino.html" class="work-nav-link">Ritual divino →</a>
 </div>
 
@@ -337,15 +365,15 @@
 <!-- BODY -->
 <div class="work-body">
   <div class="work-intro">
-    <div class="work-statement">Una exploración conceptual a partir de la discografía e historia de Dillom. <em>"Quien quiera nacer, tiene que destruir un mundo."</em></div>
+    <div class="work-statement" data-i18n="postmortem.statement">Una exploración conceptual a partir de la discografía e historia de Dillom. <em>"Quien quiera nacer, tiene que destruir un mundo."</em></div>
     <div class="work-desc">
-      <p><em>Post Mortem</em> es un fanzine inspirado en el álbum debut de Dillom y su conexión conceptual con <em>Demian</em>, el libro de Herman Hesse. Representa el momento de quiebre en el que Dylan, la persona, se convierte en Dillom, el artista.</p>
-      <p>A través del collage digital y una paleta de colores vibrantes, busca mostrar el lenguaje provocativo e irónico del cantante, en un fanzine de 3 páginas con un póster en el reverso.</p>
-      <p>El proyecto también incluye un prototipo de página web a modo de videojuego, con estética pixel art, que recorre diferentes etapas de la vida del artista mientras el usuario moldea una canción.</p>
+      <p data-i18n="postmortem.desc.1"><em>Post Mortem</em> es un fanzine inspirado en el álbum debut de Dillom y su conexión conceptual con <em>Demian</em>, el libro de Herman Hesse. Representa el momento de quiebre en el que Dylan, la persona, se convierte en Dillom, el artista.</p>
+      <p data-i18n="postmortem.desc.2">A través del collage digital y una paleta de colores vibrantes, busca mostrar el lenguaje provocativo e irónico del cantante, en un fanzine de 3 páginas con un póster en el reverso.</p>
+      <p data-i18n="postmortem.desc.3">El proyecto también incluye un prototipo de página web a modo de videojuego, con estética pixel art, que recorre diferentes etapas de la vida del artista mientras el usuario moldea una canción.</p>
     </div>
   </div>
 
-  <div class="gallery-label">Imágenes</div>
+  <div class="gallery-label" data-i18n="work.gallery.images">Imágenes</div>
 
   <!-- 2x2 grid: tapa+contratapa, INFIERNO, velas, RESURGIR -->
   <div class="gallery-grid-2">
@@ -357,7 +385,7 @@
     <img src="assets/post-mortem/resurgir.jpg" alt="Post Mortem — RESURGIR">
   </div>
 
-  <div class="gallery-section-label">Videojuego web</div>
+  <div class="gallery-section-label" data-i18n="postmortem.gallery.game">Videojuego web</div>
 
   <!-- 2 GIFs en grilla 2x1, botón en el segundo -->
   <div class="gallery-grid-2">
@@ -366,12 +394,12 @@
     </div>
     <div class="gif-wrap">
       <img src="assets/post-mortem/fabrica-hits-gameplay.gif" alt="Post Mortem — La Fábrica de Hits gameplay">
-      <a href="https://www.figma.com/proto/aXRI5j5Jnkn59O7lZAqxko/LA-F%C3%81BRICA-DE-HITS---Gallo?team_id=1359150391404540387&node-id=15-46&page-id=0%3A1&starting-point-node-id=15%3A46&scaling=scale-down&content-scaling=fixed&t=ky5IAgctla1oOAMW-1" target="_blank" class="proto-link">Ver prototipo ↗</a>
+      <a href="https://www.figma.com/proto/aXRI5j5Jnkn59O7lZAqxko/LA-F%C3%81BRICA-DE-HITS---Gallo?team_id=1359150391404540387&node-id=15-46&page-id=0%3A1&starting-point-node-id=15%3A46&scaling=scale-down&content-scaling=fixed&t=ky5IAgctla1oOAMW-1" target="_blank" class="proto-link" data-i18n="postmortem.proto.link">Ver prototipo ↗</a>
     </div>
   </div>
 
   <div class="back-to-top">
-    <a href="#top">↑ Volver al inicio</a>
+    <a href="#top" data-i18n="work.back.top">↑ Volver al inicio</a>
   </div>
 </div>
 
@@ -381,18 +409,18 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
       <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ramiro Gallo — Diseñador Multidisciplinar</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -68,6 +69,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -694,20 +706,25 @@
   }
 </style>
 </head>
-<body>
+<body data-page-title-key="page.title">
 
 <!-- ══ NAV ════════════════════════════════════════════════ -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -715,15 +732,12 @@
 <!-- ══ HERO ═══════════════════════════════════════════════ -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-index">Acerca de mí</div>
-    <h1 class="hero-h1">
-      <em>¡Hola!</em><br>
-      Soy Ramiro.
-    </h1>
+    <div class="hero-index" data-i18n="hero.eyebrow">Acerca de mí</div>
+    <h1 class="hero-h1" data-i18n="hero.h1"><em>¡Hola!</em><br>Soy Ramiro.</h1>
     <div class="hero-descriptor">
-      <p><strong>Diseñador multidisciplinario basado en Buenos Aires.</strong> <br> Me interesan lo audiovisual, la edición, el diseño sonoro y el diseño de producto — y disfruto cada vez que esos mundos se cruzan.</p>
+      <p data-i18n="hero.descriptor"><strong>Diseñador multidisciplinario basado en Buenos Aires.</strong> <br> Me interesan lo audiovisual, la edición, el diseño sonoro y el diseño de producto — y disfruto cada vez que esos mundos se cruzan.</p>
     </div>
-    <a href="about-ramiro-gallo.html" class="hero-cta">Conocerme mejor →</a>
+    <a href="about-ramiro-gallo.html" class="hero-cta" data-i18n="hero.cta">Conocerme mejor →</a>
     <div class="hero-tags">
       <span class="hero-tag">Illustrator</span>
       <span class="hero-tag">Photoshop</span>
@@ -742,17 +756,17 @@
   <div class="hero-right">
     <img class="hero-photo" src="assets/landing/hero.png" alt="Ramiro Gallo">
   </div>
-  <div class="hero-top-label hero-top-right">Portfolio · 2026</div>
+  <div class="hero-top-label hero-top-right" data-i18n="hero.top.label">Portfolio · 2026</div>
 </section>
 
 <!-- ══ TRABAJOS — CARRUSEL ════════════════════════════════ -->
 <section class="works-section">
   <div class="works-header">
     <div>
-      <div class="section-tag reveal">Trabajos seleccionados</div>
-      <h2 class="section-title reveal reveal-delay-1">Lo que hago</h2>
+      <div class="section-tag reveal" data-i18n="works.tag">Trabajos seleccionados</div>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="works.title">Lo que hago</h2>
     </div>
-    <a href="trabajos-ramiro-gallo.html" class="section-link reveal">Ver todos →</a>
+    <a href="trabajos-ramiro-gallo.html" class="section-link reveal" data-i18n="works.link">Ver todos →</a>
   </div>
 
   <div class="carousel-outer" id="carouselOuter">
@@ -766,20 +780,20 @@
 
 <!-- ══ CONTACTO ════════════════════════════════════════════ -->
 <section class="contact-section" id="contactSection">
-  <div class="contact-eyebrow reveal">Contacto</div>
-  <h2 class="contact-h2 reveal reveal-delay-1">¿Trabajamos juntos?</h2>
+  <div class="contact-eyebrow reveal" data-i18n="contact.eyebrow">Contacto</div>
+  <h2 class="contact-h2 reveal reveal-delay-1" data-i18n="contact.h2">¿Trabajamos juntos?</h2>
 
   <div class="contact-grid reveal reveal-delay-2">
     <!-- Columna izquierda — Info -->
     <div class="contact-info">
-      <div class="contact-info-title">Datos de contacto</div>
+      <div class="contact-info-title" data-i18n="contact.info.title">Datos de contacto</div>
       <a href="mailto:ramiro.gallo@outlook.com" class="contact-info-row">
-        <span class="contact-info-type">Correo</span>
+        <span class="contact-info-type" data-i18n="fab.panel.email">Correo</span>
         <span class="contact-info-value">ramiro.gallo@outlook.com</span>
         <span class="contact-info-arrow">→</span>
       </a>
       <a href="tel:+5491136318967" class="contact-info-row">
-        <span class="contact-info-type">Teléfono</span>
+        <span class="contact-info-type" data-i18n="fab.panel.phone">Teléfono</span>
         <span class="contact-info-value">+54 9 11 3631 8967</span>
         <span class="contact-info-arrow">→</span>
       </a>
@@ -788,12 +802,12 @@
         <span class="contact-info-value">ramiro-gallo-441877209</span>
         <span class="contact-info-arrow">→</span>
       </a>
-      <p class="contact-info-sub">Estoy disponible para proyectos freelance, colaboraciones y oportunidades de tiempo completo.</p>
+      <p class="contact-info-sub" data-i18n="contact.info.sub">Estoy disponible para proyectos freelance, colaboraciones y oportunidades de tiempo completo.</p>
     </div>
 
     <!-- Columna derecha — Formulario -->
     <div class="contact-form-wrap">
-      <div class="contact-form-title">Contacto rápido</div>
+      <div class="contact-form-title" data-i18n="contact.form.title">Contacto rápido</div>
       <form id="contactForm" action="https://formsubmit.co/ramiro.gallo@outlook.com" method="POST">
         <!-- FormSubmit config -->
         <input type="hidden" name="_subject" value="Nuevo mensaje desde tu portfolio">
@@ -803,33 +817,33 @@
         <input type="hidden" name="_template" value="table">
         <div class="contact-form-row">
           <div class="contact-field half">
-            <label class="contact-label" for="cf-nombre">Nombre</label>
-            <input class="contact-input" type="text" id="cf-nombre" name="nombre" placeholder="Tu nombre" required>
+            <label class="contact-label" for="cf-nombre" data-i18n="form.label.nombre">Nombre</label>
+            <input class="contact-input" type="text" id="cf-nombre" name="nombre" placeholder="Tu nombre" required data-i18n="form.placeholder.nombre">
           </div>
           <div class="contact-field half">
-            <label class="contact-label" for="cf-apellido">Apellido</label>
-            <input class="contact-input" type="text" id="cf-apellido" name="apellido" placeholder="Tu apellido" required>
+            <label class="contact-label" for="cf-apellido" data-i18n="form.label.apellido">Apellido</label>
+            <input class="contact-input" type="text" id="cf-apellido" name="apellido" placeholder="Tu apellido" required data-i18n="form.placeholder.apellido">
           </div>
         </div>
         <div class="contact-form-row">
           <div class="contact-field half">
-            <label class="contact-label" for="cf-empresa">Empresa <span class="optional">(opcional)</span></label>
-            <input class="contact-input" type="text" id="cf-empresa" name="empresa" placeholder="Tu empresa">
+            <label class="contact-label" for="cf-empresa" data-i18n="form.label.empresa">Empresa <span class="optional">(opcional)</span></label>
+            <input class="contact-input" type="text" id="cf-empresa" name="empresa" placeholder="Tu empresa" data-i18n="form.placeholder.empresa">
           </div>
           <div class="contact-field half">
-            <label class="contact-label" for="cf-correo">Correo</label>
-            <input class="contact-input" type="email" id="cf-correo" name="correo" placeholder="tu@correo.com" required>
+            <label class="contact-label" for="cf-correo" data-i18n="form.label.correo">Correo</label>
+            <input class="contact-input" type="email" id="cf-correo" name="correo" placeholder="tu@correo.com" required data-i18n="form.placeholder.correo">
           </div>
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-asunto">Motivo del contacto</label>
-          <input class="contact-input" type="text" id="cf-asunto" name="asunto" placeholder="¿En qué puedo ayudarte?" required>
+          <label class="contact-label" for="cf-asunto" data-i18n="form.label.asunto">Motivo del contacto</label>
+          <input class="contact-input" type="text" id="cf-asunto" name="asunto" placeholder="¿En qué puedo ayudarte?" required data-i18n="form.placeholder.asunto">
         </div>
         <div class="contact-field">
-          <label class="contact-label" for="cf-mensaje">Mensaje</label>
-          <textarea class="contact-textarea" id="cf-mensaje" name="mensaje" placeholder="Contame más sobre tu proyecto o idea..." required></textarea>
+          <label class="contact-label" for="cf-mensaje" data-i18n="form.label.mensaje">Mensaje</label>
+          <textarea class="contact-textarea" id="cf-mensaje" name="mensaje" placeholder="Contame más sobre tu proyecto o idea..." required data-i18n="form.placeholder.mensaje"></textarea>
         </div>
-        <button type="submit" class="contact-submit">Enviar mensaje →</button>
+        <button type="submit" class="contact-submit" data-i18n="form.submit">Enviar mensaje →</button>
       </form>
     </div>
   </div>
@@ -843,18 +857,18 @@
 <!-- ══ FAB ════════════════════════════════════════════════ -->
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
       <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -1267,6 +1281,8 @@ if (contactSec) {
   renderClean();
   startAuto();
 
+  window._PROJECTS = PROJECTS;
+  window._renderClean = renderClean;
 })();
 </script>
 </body>

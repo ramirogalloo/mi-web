@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Monkey — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -47,6 +48,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -70,7 +82,7 @@
 
   .work-hero { background: var(--forest); padding: 52px 60px 48px; position: relative; overflow: hidden; }
   .work-hero-bg-num { position: absolute; bottom: -0.05em; right: 40px; font-family: "DM Serif Display", serif; font-size: clamp(140px, 18vw, 240px); color: rgba(200,207,168,0.04); line-height: 1; pointer-events: none; user-select: none; }
-  .work-back { display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
+  .work-back { display: none; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
   .work-back:hover { opacity: 1; }
   .work-eyebrow { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 18px; opacity: 0.8; }
   .work-hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: flex-end; }
@@ -81,9 +93,11 @@
   .work-meta-tags { display: flex; gap: 5px; flex-wrap: wrap; }
   .work-meta-tag { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(200,207,168,0.22); border-radius: 2px; color: var(--sage); opacity: 0.75; }
 
-  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
+  .work-nav { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
   .work-nav-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s; }
   .work-nav-link:hover { opacity: 0.6; }
+  .work-nav-back { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+  .work-nav-back:hover { opacity: 1; }
 
   .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
   .work-cover img { width: 100%; height: auto; display: block; }
@@ -101,16 +115,14 @@
   .youtube-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 2px; overflow: hidden; background: var(--forest); }
   .youtube-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
 
-  /* Video placeholder */
-  .video-placeholder {
-    width: 100%; aspect-ratio: 16/9; border-radius: 2px;
-    background: var(--forest);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  /* Video */
+  .video-wrap {
+    width: 100%;
+    max-height: calc(100vh - var(--nav-h) - var(--marquee-h) - 75px);
+    aspect-ratio: 16/9;
+    border-radius: 2px; overflow: hidden; background: var(--nebula); margin-bottom: 10px;
   }
-  .video-placeholder span {
-    font-family: "Space Mono", monospace; font-size: 9px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); opacity: 0.5;
-  }
+  .video-wrap video { width: 100%; height: 100%; display: block; object-fit: contain; background: rgb(19, 25, 11); }
 
   .back-to-top { display: flex; justify-content: center; padding: 48px 60px 0; border-top: 1px solid rgba(90,107,58,0.12); margin-top: 48px; }
   .back-to-top a { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-dark); text-decoration: none; opacity: 0.5; display: flex; align-items: center; gap: 8px; transition: opacity 0.2s; }
@@ -170,10 +182,12 @@
       right: 16px;
     }
     .work-back {
+      display: inline-flex;
       font-size: 8px;
       letter-spacing: 0.12em;
       margin-bottom: 18px;
     }
+    .work-nav-back { display: none; }
     .work-eyebrow {
       margin-bottom: 14px;
     }
@@ -221,10 +235,9 @@
       margin-top: 14px;
     }
 
-    /* — Video placeholder — */
-    .video-placeholder span {
-      font-size: 8px;
-      letter-spacing: 0.14em;
+    /* — Video — */
+    .video-wrap {
+      max-height: none;
     }
 
     /* — Back to top — */
@@ -265,14 +278,19 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -280,29 +298,29 @@
 <!-- HERO -->
 <div class="work-hero" id="top">
   <div class="work-hero-bg-num">04</div>
-  <a href="trabajos-ramiro-gallo.html" class="work-back">↑ Todos los trabajos</a>
-  <div class="work-eyebrow">Sonoro · Audiovisual · 2025</div>
+  <a href="trabajos-ramiro-gallo.html" class="work-back" data-i18n="work.back">↑ Todos los trabajos</a>
+  <div class="work-eyebrow" data-i18n="monkey.eyebrow">Sonoro · Audiovisual · 2025</div>
   <div class="work-hero-grid">
     <h1 class="work-title">The Monkey</h1>
     <div class="work-meta">
       <div>
-        <div class="work-meta-label">Equipo</div>
+        <div class="work-meta-label" data-i18n="work.meta.team">Equipo</div>
         <div class="work-meta-value">Pedro Benadiba</div>
       </div>
       <div>
-        <div class="work-meta-label">Herramientas</div>
+        <div class="work-meta-label" data-i18n="work.meta.tools">Herramientas</div>
         <div class="work-meta-tags">
           <span class="work-meta-tag">Pro Tools</span>
           <span class="work-meta-tag">Reaper</span>
         </div>
       </div>
       <div>
-        <div class="work-meta-label">Habilidades</div>
+        <div class="work-meta-label" data-i18n="work.meta.skills">Habilidades</div>
         <div class="work-meta-tags">
-          <span class="work-meta-tag">Diseño sonoro</span>
-          <span class="work-meta-tag">Técnica de sonido</span>
-          <span class="work-meta-tag">Grabación y edición</span>
-          <span class="work-meta-tag">Foley</span>
+          <span class="work-meta-tag" data-i18n="monkey.skill.1">Diseño sonoro</span>
+          <span class="work-meta-tag" data-i18n="monkey.skill.2">Técnica de sonido</span>
+          <span class="work-meta-tag" data-i18n="monkey.skill.3">Grabación y edición</span>
+          <span class="work-meta-tag" data-i18n="monkey.skill.4">Foley</span>
         </div>
       </div>
     </div>
@@ -312,6 +330,7 @@
 <!-- WORK NAV -->
 <div class="work-nav">
   <a href="trabajo-ritual-divino.html" class="work-nav-link">← Ritual divino</a>
+  <a href="trabajos-ramiro-gallo.html" class="work-nav-back" data-i18n="work.nav.back">↑ Todos los trabajos</a>
   <a href="trabajo-mulo.html" class="work-nav-link">MULO →</a>
 </div>
 
@@ -323,30 +342,37 @@
 <!-- BODY -->
 <div class="work-body">
   <div class="work-intro">
-    <div class="work-statement">¿Cómo se componen los sonidos que escuchamos en las películas? <em>¿Cómo se crea un sonido que no existe en la realidad?</em></div>
+    <div class="work-statement" data-i18n="monkey.statement">¿Cómo se componen los sonidos que escuchamos en las películas? <em>¿Cómo se crea un sonido que no existe en la realidad?</em></div>
     <div class="work-desc">
-      <p>Partiendo de una pieza audiovisual existente, se eliminó la pista de audio original y se resonorizaron 10 minutos completos: actuar y grabar los sonidos que debería haber en la escena, mirando el video al mismo tiempo.</p>
-      <p>El Foley implica recrear manualmente sonidos cotidianos en un estudio en sincronía con la imagen, generando audios personalizados específicos para esa pieza.</p>
-      <p>Para llegar a resultados más interesantes, no se busca usar el mismo objeto que se ve en pantalla, sino que se desglosa el sonido objetivo y se construye en capas, con otros objetos o props.</p>
+      <p data-i18n="monkey.desc.1">Partiendo de una pieza audiovisual existente, se eliminó la pista de audio original y se resonorizaron 10 minutos completos: actuar y grabar los sonidos que debería haber en la escena, mirando el video al mismo tiempo.</p>
+      <p data-i18n="monkey.desc.2">El Foley implica recrear manualmente sonidos cotidianos en un estudio en sincronía con la imagen, generando audios personalizados específicos para esa pieza.</p>
+      <p data-i18n="monkey.desc.3">Para llegar a resultados más interesantes, no se busca usar el mismo objeto que se ve en pantalla, sino que se desglosa el sonido objetivo y se construye en capas, con otros objetos o props.</p>
     </div>
   </div>
 
-  <div class="gallery-label">Video</div>
-
-  <!-- Video local — colocar archivo en assets/the-monkey/video.mp4 -->
-  <div class="video-placeholder">
-    <span>Video — próximamente</span>
-  </div>
-  <!-- Descomentar cuando el video esté disponible:
-  <div class="youtube-wrap">
-    <video controls preload="metadata" style="width:100%;height:100%;object-fit:cover;">
-      <source src="assets/the-monkey/video.mp4" type="video/mp4">
+  <div class="gallery-label">Clip 01</div>
+  <div class="video-wrap">
+    <video controls preload="metadata">
+      <source src="assets/the-monkey/clip1.mp4" type="video/mp4">
     </video>
   </div>
-  -->
+
+  <div class="gallery-label">Clip 02</div>
+  <div class="video-wrap">
+    <video controls preload="metadata">
+      <source src="assets/the-monkey/clip2.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="gallery-label">Clip 03</div>
+  <div class="video-wrap">
+    <video controls preload="metadata">
+      <source src="assets/the-monkey/clip3.mp4" type="video/mp4">
+    </video>
+  </div>
 
   <div class="back-to-top">
-    <a href="#top">↑ Volver al inicio</a>
+    <a href="#top" data-i18n="work.back.top">↑ Volver al inicio</a>
   </div>
 </div>
 
@@ -356,18 +382,18 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
       <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>

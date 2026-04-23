@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trabajos — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -54,6 +55,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -362,41 +374,46 @@
   }
 </style>
 </head>
-<body>
+<body data-page-title-key="works.page.title">
 
 
 <!-- ══ NAV ════════════════════════════════════════════════ -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link active">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link active" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
 
 <div class="section-header anim anim-d1">
   <div>
-    <div class="section-eyebrow">Selección de trabajos</div>
-    <h1 class="section-title">Proyectos <em>destacados</em></h1>
+    <div class="section-eyebrow" data-i18n="works.eyebrow">Selección de trabajos</div>
+    <h1 class="section-title" data-i18n="works.h1">Proyectos <em>destacados</em></h1>
   </div>
-  <div class="section-count">05 proyectos</div>
+  <div class="section-count" data-i18n="works.count">05 proyectos</div>
 </div>
 
 <div class="filters anim anim-d2">
-  <button class="filter-btn active" onclick="setFilter(this,'todos')">Todos</button>
+  <button class="filter-btn active" onclick="setFilter(this,'todos')" data-i18n="filter.todos">Todos</button>
   <button class="filter-btn" onclick="setFilter(this,'audiovisual')">Audiovisual</button>
-  <button class="filter-btn" onclick="setFilter(this,'sonoro')">Sonoro</button>
-  <button class="filter-btn" onclick="setFilter(this,'identidad')">Identidad</button>
+  <button class="filter-btn" onclick="setFilter(this,'sonoro')" data-i18n="filter.sonoro">Sonoro</button>
+  <button class="filter-btn" onclick="setFilter(this,'identidad')" data-i18n="filter.identidad">Identidad</button>
   <button class="filter-btn" onclick="setFilter(this,'conceptual')">Conceptual</button>
-  <button class="filter-btn" onclick="setFilter(this,'gráfico')">Gráfico</button>
-  <button class="filter-btn" onclick="setFilter(this,'producto')">Producto</button>
+  <button class="filter-btn" onclick="setFilter(this,'gráfico')" data-i18n="filter.grafico">Gráfico</button>
+  <button class="filter-btn" onclick="setFilter(this,'producto')" data-i18n="filter.producto">Producto</button>
 </div>
 
 <div class="grid-wrapper anim anim-d3">
@@ -406,7 +423,7 @@
       <div class="card-img-wrap"><img class="card-img" src="assets/patagon/cover.jpg" alt="Patagón"></div>
       <div class="card-info">
         <div class="card-top-row">
-          <div class="card-tags"><span class="card-tag">Conceptual</span><span class="card-tag"> · </span><span class="card-tag">Gráfico</span><span class="card-tag"> · </span><span class="card-tag">Producto</span></div>
+          <div class="card-tags"><span class="card-tag" data-i18n="card.tag.conceptual">Conceptual</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.grafico">Gráfico</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.producto">Producto</span></div>
           <span class="card-year">2025</span>
         </div>
         <div class="card-bottom-row">
@@ -420,7 +437,7 @@
       <div class="card-img-wrap"><img class="card-img" src="assets/post-mortem/cover.jpg" alt="Post Mortem"></div>
       <div class="card-info">
         <div class="card-top-row">
-          <div class="card-tags"><span class="card-tag">Conceptual</span><span class="card-tag"> · </span><span class="card-tag">Gráfico</span><span class="card-tag"> · </span><span class="card-tag">Identidad</span></div>
+          <div class="card-tags"><span class="card-tag" data-i18n="card.tag.conceptual">Conceptual</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.grafico">Gráfico</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.identidad">Identidad</span></div>
           <span class="card-year">2024</span>
         </div>
         <div class="card-bottom-row">
@@ -434,7 +451,7 @@
       <div class="card-img-wrap"><img class="card-img" src="assets/ritual-divino/cover.jpg" alt="Ritual divino"></div>
       <div class="card-info">
         <div class="card-top-row">
-          <div class="card-tags"><span class="card-tag">Conceptual</span><span class="card-tag"> · </span><span class="card-tag">Sonoro</span><span class="card-tag"> · </span><span class="card-tag">Audiovisual</span></div>
+          <div class="card-tags"><span class="card-tag" data-i18n="card.tag.conceptual">Conceptual</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.sonoro">Sonoro</span><span class="card-tag"> · </span><span class="card-tag">Audiovisual</span></div>
           <span class="card-year">2025</span>
         </div>
         <div class="card-bottom-row">
@@ -448,7 +465,7 @@
       <div class="card-img-wrap"><img class="card-img" src="assets/the-monkey/cover.jpg" alt="The Monkey"></div>
       <div class="card-info">
         <div class="card-top-row">
-          <div class="card-tags"><span class="card-tag">Sonoro</span><span class="card-tag"> · </span><span class="card-tag">Audiovisual</span></div>
+          <div class="card-tags"><span class="card-tag" data-i18n="card.tag.sonoro">Sonoro</span><span class="card-tag"> · </span><span class="card-tag">Audiovisual</span></div>
           <span class="card-year">2025</span>
         </div>
         <div class="card-bottom-row">
@@ -462,7 +479,7 @@
       <div class="card-img-wrap"><img class="card-img" src="assets/mulo/cover.jpg" alt="MULO"></div>
       <div class="card-info">
         <div class="card-top-row">
-          <div class="card-tags"><span class="card-tag">Identidad</span><span class="card-tag"> · </span><span class="card-tag">Conceptual</span><span class="card-tag"> · </span><span class="card-tag">Gráfico</span></div>
+          <div class="card-tags"><span class="card-tag" data-i18n="card.tag.identidad">Identidad</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.conceptual">Conceptual</span><span class="card-tag"> · </span><span class="card-tag" data-i18n="card.tag.grafico">Gráfico</span></div>
           <span class="card-year">2025</span>
         </div>
         <div class="card-bottom-row">
@@ -483,9 +500,9 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span>
       <span class="panel-row-value">ramiro.gallo@outlook.com</span>
       <span class="panel-arrow">→</span>
     </a>
@@ -495,12 +512,12 @@
       <span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span>
       <span class="panel-row-value">+54 9 11 3631 8967</span>
       <span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>

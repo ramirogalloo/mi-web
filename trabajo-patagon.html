@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patagón — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -52,6 +53,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -86,7 +98,7 @@
     pointer-events: none; user-select: none;
   }
   .work-back {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: none; align-items: center; gap: 8px;
     font-family: "Space Mono", monospace; font-size: 9px;
     letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--sage); text-decoration: none; opacity: 0.7;
@@ -123,6 +135,7 @@
 
   /* ── WORK NAV (between works) ── */
   .work-nav {
+    position: relative;
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 60px;
     background: var(--sage-deep);
@@ -135,6 +148,15 @@
     transition: opacity 0.2s;
   }
   .work-nav-link:hover { opacity: 0.6; }
+  .work-nav-back {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Space Mono", monospace; font-size: 9px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--sage); text-decoration: none; opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .work-nav-back:hover { opacity: 1; }
 
   /* ── COVER ── */
   .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
@@ -283,10 +305,12 @@
       right: 16px;
     }
     .work-back {
+      display: inline-flex;
       font-size: 8px;
       letter-spacing: 0.12em;
       margin-bottom: 18px;
     }
+    .work-nav-back { display: none; }
     .work-eyebrow {
       margin-bottom: 14px;
     }
@@ -377,14 +401,19 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -392,17 +421,17 @@
 <!-- HERO -->
 <div class="work-hero" id="top">
   <div class="work-hero-bg-num">01</div>
-  <a href="trabajos-ramiro-gallo.html" class="work-back">↑ Todos los trabajos</a>
-  <div class="work-eyebrow">Conceptual · Gráfico · Producto · 2025</div>
+  <a href="trabajos-ramiro-gallo.html" class="work-back" data-i18n="work.back">↑ Todos los trabajos</a>
+  <div class="work-eyebrow" data-i18n="patagon.eyebrow">Conceptual · Gráfico · Producto · 2025</div>
   <div class="work-hero-grid">
     <h1 class="work-title">Patagón</h1>
     <div class="work-meta">
       <div>
-        <div class="work-meta-label">Equipo</div>
+        <div class="work-meta-label" data-i18n="work.meta.team">Equipo</div>
         <div class="work-meta-value">José Díaz Herrera</div>
       </div>
       <div>
-        <div class="work-meta-label">Herramientas</div>
+        <div class="work-meta-label" data-i18n="work.meta.tools">Herramientas</div>
         <div class="work-meta-tags">
           <span class="work-meta-tag">Procreate</span>
           <span class="work-meta-tag">Illustrator</span>
@@ -410,11 +439,11 @@
         </div>
       </div>
       <div>
-        <div class="work-meta-label">Habilidades</div>
+        <div class="work-meta-label" data-i18n="work.meta.skills">Habilidades</div>
         <div class="work-meta-tags">
-          <span class="work-meta-tag">Ilustración</span>
-          <span class="work-meta-tag">Desarrollo conceptual</span>
-          <span class="work-meta-tag">Narrativa</span>
+          <span class="work-meta-tag" data-i18n="patagon.skill.1">Ilustración</span>
+          <span class="work-meta-tag" data-i18n="patagon.skill.2">Desarrollo conceptual</span>
+          <span class="work-meta-tag" data-i18n="patagon.skill.3">Narrativa</span>
         </div>
       </div>
     </div>
@@ -424,6 +453,7 @@
 <!-- WORK NAV — between hero and cover -->
 <div class="work-nav">
   <a href="trabajo-mulo.html" class="work-nav-link">← MULO</a>
+  <a href="trabajos-ramiro-gallo.html" class="work-nav-back" data-i18n="work.nav.back">↑ Todos los trabajos</a>
   <a href="trabajo-post-mortem.html" class="work-nav-link">Post Mortem →</a>
 </div>
 
@@ -435,14 +465,14 @@
 <!-- BODY -->
 <div class="work-body">
   <div class="work-intro">
-    <div class="work-statement">Un juego de mesa para cuatro personas: <em>a conquistar las tierras del sur.</em></div>
+    <div class="work-statement" data-i18n="patagon.statement">Un juego de mesa para cuatro personas: <em>a conquistar las tierras del sur.</em></div>
     <div class="work-desc">
-      <p>El proyecto consistió en la ideación, conceptualización y realización completa de un juego de mesa listo para jugar. Diseñamos e ilustramos cada pieza, ficha y carta.</p>
-      <p>El resultado final fue un tablero de MDF, fichas para cada jugador y cuatro mazos de cartas, con ilustraciones caricaturescas basadas en la Patagonia argentina.</p>
+      <p data-i18n="patagon.desc.1">El proyecto consistió en la ideación, conceptualización y realización completa de un juego de mesa listo para jugar. Diseñamos e ilustramos cada pieza, ficha y carta.</p>
+      <p data-i18n="patagon.desc.2">El resultado final fue un tablero de MDF, fichas para cada jugador y cuatro mazos de cartas, con ilustraciones caricaturescas basadas en la Patagonia argentina.</p>
     </div>
   </div>
 
-  <div class="gallery-label">Imágenes</div>
+  <div class="gallery-label" data-i18n="work.gallery.images">Imágenes</div>
 
   <!-- 3 fotos de detalle -->
   <div class="gallery-grid-3">
@@ -465,7 +495,7 @@
 
   <!-- back to top -->
   <div class="back-to-top">
-    <a href="#top">↑ Volver al inicio</a>
+    <a href="#top" data-i18n="work.back.top">↑ Volver al inicio</a>
   </div>
 </div>
 
@@ -475,18 +505,18 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
       <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>

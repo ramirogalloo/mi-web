@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ritual divino — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
@@ -47,6 +48,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -71,7 +83,7 @@
   /* HERO */
   .work-hero { background: var(--forest); padding: 52px 60px 48px; position: relative; overflow: hidden; }
   .work-hero-bg-num { position: absolute; bottom: -0.05em; right: 40px; font-family: "DM Serif Display", serif; font-size: clamp(140px, 18vw, 240px); color: rgba(200,207,168,0.04); line-height: 1; pointer-events: none; user-select: none; }
-  .work-back { display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
+  .work-back { display: none; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; margin-bottom: 22px; transition: opacity 0.2s; }
   .work-back:hover { opacity: 1; }
   .work-eyebrow { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 18px; opacity: 0.8; }
   .work-hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: flex-end; }
@@ -83,9 +95,11 @@
   .work-meta-tag { font-family: "Space Mono", monospace; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border: 1px solid rgba(200,207,168,0.22); border-radius: 2px; color: var(--sage); opacity: 0.75; }
 
   /* WORK NAV */
-  .work-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
+  .work-nav { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: var(--sage-deep); }
   .work-nav-link { font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: opacity 0.2s; }
   .work-nav-link:hover { opacity: 0.6; }
+  .work-nav-back { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 8px; font-family: "Space Mono", monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+  .work-nav-back:hover { opacity: 1; }
 
   /* COVER */
   .work-cover { width: 100%; border-top: 1px solid rgba(90,107,58,0.15); }
@@ -180,10 +194,12 @@
       right: 16px;
     }
     .work-back {
+      display: inline-flex;
       font-size: 8px;
       letter-spacing: 0.12em;
       margin-bottom: 18px;
     }
+    .work-nav-back { display: none; }
     .work-eyebrow {
       margin-bottom: 14px;
     }
@@ -282,14 +298,19 @@
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -298,17 +319,17 @@
 <!-- HERO -->
 <div class="work-hero" id="top">
   <div class="work-hero-bg-num">03</div>
-  <a href="trabajos-ramiro-gallo.html" class="work-back">↑ Todos los trabajos</a>
-  <div class="work-eyebrow">Conceptual · Sonoro · Audiovisual · 2025</div>
+  <a href="trabajos-ramiro-gallo.html" class="work-back" data-i18n="work.back">↑ Todos los trabajos</a>
+  <div class="work-eyebrow" data-i18n="ritual.eyebrow">Conceptual · Sonoro · Audiovisual · 2025</div>
   <div class="work-hero-grid">
     <h1 class="work-title">Ritual divino</h1>
     <div class="work-meta">
       <div>
-        <div class="work-meta-label">Equipo</div>
+        <div class="work-meta-label" data-i18n="work.meta.team">Equipo</div>
         <div class="work-meta-value">Elisa Cipriani — Nicole Ferri</div>
       </div>
       <div>
-        <div class="work-meta-label">Herramientas</div>
+        <div class="work-meta-label" data-i18n="work.meta.tools">Herramientas</div>
         <div class="work-meta-tags">
           <span class="work-meta-tag">Blender</span>
           <span class="work-meta-tag">Premiere Pro</span>
@@ -316,12 +337,12 @@
         </div>
       </div>
       <div>
-        <div class="work-meta-label">Habilidades</div>
+        <div class="work-meta-label" data-i18n="work.meta.skills">Habilidades</div>
         <div class="work-meta-tags">
-          <span class="work-meta-tag">Modelado 3D</span>
-          <span class="work-meta-tag">Animación</span>
-          <span class="work-meta-tag">Desarrollo conceptual</span>
-          <span class="work-meta-tag">Diseño sonoro</span>
+          <span class="work-meta-tag" data-i18n="ritual.skill.1">Modelado 3D</span>
+          <span class="work-meta-tag" data-i18n="ritual.skill.2">Animación</span>
+          <span class="work-meta-tag" data-i18n="ritual.skill.3">Desarrollo conceptual</span>
+          <span class="work-meta-tag" data-i18n="ritual.skill.4">Diseño sonoro</span>
         </div>
       </div>
     </div>
@@ -331,6 +352,7 @@
 <!-- WORK NAV -->
 <div class="work-nav">
   <a href="trabajo-post-mortem.html" class="work-nav-link">← Post Mortem</a>
+  <a href="trabajos-ramiro-gallo.html" class="work-nav-back" data-i18n="work.nav.back">↑ Todos los trabajos</a>
   <a href="trabajo-the-monkey.html" class="work-nav-link">The Monkey →</a>
 </div>
 
@@ -342,14 +364,14 @@
 <!-- BODY -->
 <div class="work-body">
   <div class="work-intro">
-    <div class="work-statement">¿Qué pasa en la conciencia al adentrarse en su interior? <em>Un acto ceremonial dado para honrar, conectar o invocar.</em></div>
+    <div class="work-statement" data-i18n="ritual.statement">¿Qué pasa en la conciencia al adentrarse en su interior? <em>Un acto ceremonial dado para honrar, conectar o invocar.</em></div>
     <div class="work-desc">
-      <p>Un viaje dentro de la conciencia, un ritual interno, una búsqueda de elevación, de conexión con algo más poderoso, algo que se encuentra en el más allá. Ese flotar de la mente se convierte en un lugar que gravita entre realidad y fantasía.</p>
-      <p>La experiencia consiste en una pieza audiovisual de 60 segundos diseñada para verse en gafas de realidad virtual. Implicó el desarrollo del concepto, la creación del entorno sonoro, y el modelado y la animación del paisaje y sus personajes.</p>
+      <p data-i18n="ritual.desc.1">Un viaje dentro de la conciencia, un ritual interno, una búsqueda de elevación, de conexión con algo más poderoso, algo que se encuentra en el más allá. Ese flotar de la mente se convierte en un lugar que gravita entre realidad y fantasía.</p>
+      <p data-i18n="ritual.desc.2">La experiencia consiste en una pieza audiovisual de 60 segundos diseñada para verse en gafas de realidad virtual. Implicó el desarrollo del concepto, la creación del entorno sonoro, y el modelado y la animación del paisaje y sus personajes.</p>
     </div>
   </div>
 
-  <div class="gallery-label">Imágenes</div>
+  <div class="gallery-label" data-i18n="work.gallery.images">Imágenes</div>
 
   <!-- ritual1 a ancho completo -->
   <div class="gallery-full">
@@ -363,12 +385,12 @@
     </div>
     <div class="gif-wrap">
       <img src="assets/ritual-divino/escena-nocturna-azul.gif" alt="Ritual divino — escena nocturna azul">
-      <a href="https://www.youtube.com/watch?v=zbDPp8YUTwk" target="_blank" class="video-link">Ver video completo ↗</a>
+      <a href="https://www.youtube.com/watch?v=zbDPp8YUTwk" target="_blank" class="video-link" data-i18n="ritual.video.link">Ver video completo ↗</a>
     </div>
   </div>
 
   <div class="back-to-top">
-    <a href="#top">↑ Volver al inicio</a>
+    <a href="#top" data-i18n="work.back.top">↑ Volver al inicio</a>
   </div>
 </div>
 
@@ -378,18 +400,18 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span><span class="panel-row-value">ramiro.gallo@outlook.com</span><span class="panel-arrow">→</span>
     </a>
     <a href="https://linkedin.com/in/ramiro-gallo-441877209" target="_blank" class="panel-row">
       <span class="panel-row-type">LinkedIn</span><span class="panel-row-value">ramiro-gallo-441877209</span><span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span><span class="panel-row-value">+54 9 11 3631 8967</span><span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Acerca de mí — Ramiro Gallo</title>
+<script src="i18n.js" defer></script>
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -53,6 +54,17 @@
   }
   .nav-link:hover { opacity: 0.8; }
   .nav-link.active { opacity: 1; color: var(--sage-deep); }
+  .nav-lang-btn {
+    font-family: "Space Mono", monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: none; border: none; cursor: pointer;
+    padding: 0; display: flex; align-items: center; gap: 4px;
+    color: var(--forest);
+  }
+  .lang-opt { opacity: 0.4; transition: opacity 0.2s; }
+  .lang-opt.active { opacity: 1; font-weight: 700; }
+  .lang-sep { opacity: 0.2; }
+  .nav-lang-btn:hover .lang-opt:not(.active) { opacity: 0.75; }
 
   /* ══ MARQUEE ══════════════════════════════════════════════ */
   .marquee-section {
@@ -119,7 +131,10 @@
     display: flex; flex-direction: column; justify-content: center;
     padding: 56px 72px 56px 64px;
     background: var(--cream);
-    gap: 28px; height: 100%; overflow: hidden;
+    height: 100%; overflow: hidden;
+  }
+  .hero-text-inner {
+    display: flex; flex-direction: column; gap: 28px;
   }
   .section-badge {
     font-family: "Space Mono", monospace; font-size: 9px;
@@ -362,9 +377,9 @@
     }
     .hero-text {
       padding: 40px 20px 48px;
-      gap: 24px;
       height: auto;
     }
+    .hero-text-inner { gap: 24px; }
     .hero-quote {
       font-size: clamp(22px, 6.5vw, 34px);
     }
@@ -434,21 +449,26 @@
   }
 </style>
 </head>
-<body>
+<body data-page-title-key="about.page.title">
 
 <!-- ══ NAV ════════════════════════════════════════════════ -->
 <nav id="mainNav">
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="" class="nav-logo-img">RG</a>
   <div class="nav-links">
-    <a href="about-ramiro-gallo.html" class="nav-link active">Acerca de mí</a>
-    <a href="trabajos-ramiro-gallo.html" class="nav-link">Trabajos</a>
+    <a href="about-ramiro-gallo.html" class="nav-link active" data-i18n="nav.about">Acerca de mí</a>
+    <a href="trabajos-ramiro-gallo.html" class="nav-link" data-i18n="nav.works">Trabajos</a>
+    <button class="nav-lang-btn" id="langToggle">
+      <span class="lang-opt active" data-lang-opt="es">ES</span>
+      <span class="lang-sep">|</span>
+      <span class="lang-opt" data-lang-opt="en">EN</span>
+    </button>
   </div>
 </nav>
 
 
 <!-- ══ MARQUEE ════════════════════════════════════════════ -->
 <div class="marquee-section">
-  <div class="marquee-track"><div class="marquee-inner">
+  <div class="marquee-track"><div class="marquee-inner" data-i18n="marquee">
     <span class="marquee-item">EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span>EDICIÓN DE VIDEO<span class="msep"></span>DISEÑO GRÁFICO<span class="msep"></span>ANIMACIÓN<span class="msep"></span>DISEÑO SONORO<span class="msep"></span>MOTION GRAPHICS<span class="msep"></span>DISEÑO DE PRODUCTO<span class="msep"></span>MODELADO 3D<span class="msep"></span>DISEÑO INMERSIVO<span class="msep"></span>DISEÑO DIGITAL<span class="msep"></span></span>
   </div></div>
 </div>
@@ -459,40 +479,39 @@
   <div class="hero-photo">
     <img src="assets/about/ramiro-gallo.jpg" alt="Ramiro Gallo">
     <div class="hero-photo-name">
-      <div class="name-eyebrow">Diseñador Multidisciplinar · Buenos Aires</div>
+      <div class="name-eyebrow" data-i18n="about.photo.eyebrow">Diseñador Multidisciplinar · Buenos Aires</div>
       <div class="name-main">Ramiro Gallo</div>
     </div>
   </div>
   <div class="hero-text">
-    <div class="section-badge">Acerca de mí</div>
-    <div class="hero-quote-block">
-      <p class="hero-quote">
-        Siempre hay algo más<br>
-        que quiero <em>aprender</em>.
-      </p>
-    </div>
-    <div class="hero-bio">
-      <p>Soy diseñador multidisciplinario, egresado de la Universidad Torcuato Di Tella. Desde antes de empezar a estudiar entendí que no quería quedarme en una sola disciplina: me atrae tanto <strong>lo audiovisual y lo sonoro</strong> como el <strong>modelado 3D y la identidad visual</strong>.</p>
-      <p>Soy curioso por naturaleza. Siempre estoy haciendo cursos, explorando herramientas nuevas y desarrollando proyectos propios para seguir creciendo. Trabajo con mucha atención al detalle, y eso se nota en los resultados.</p>
+    <div class="hero-text-inner">
+      <div class="section-badge" data-i18n="about.hero.badge">Acerca de mí</div>
+      <div class="hero-quote-block">
+        <p class="hero-quote" data-i18n="about.hero.quote">Siempre hay algo más<br>que quiero <em>aprender</em>.</p>
+      </div>
+      <div class="hero-bio">
+        <p data-i18n="about.bio.1">Soy diseñador multidisciplinario, egresado de la Universidad Torcuato Di Tella. Desde antes de empezar a estudiar entendí que no quería quedarme en una sola disciplina: me atrae tanto <strong>lo audiovisual y lo sonoro</strong> como el <strong>modelado 3D y la identidad visual</strong>.</p>
+        <p data-i18n="about.bio.2">Soy curioso por naturaleza. Siempre estoy haciendo cursos, explorando herramientas nuevas y desarrollando proyectos propios para seguir creciendo. Trabajo con mucha atención al detalle, y eso se nota en los resultados.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="formation-section">
-  <div class="section-label">Formación</div>
+  <div class="section-label" data-i18n="about.section.education">Formación</div>
   <div class="formation-list">
     <div class="formation-item">
       <div class="formation-row">
         <div>
-          <div class="formation-degree">Licenciatura en Diseño</div>
-          <div class="formation-inst">Universidad Torcuato Di Tella · Buenos Aires, Argentina</div>
+          <div class="formation-degree" data-i18n="about.degree.1">Licenciatura en Diseño</div>
+          <div class="formation-inst" data-i18n="about.inst.1">Universidad Torcuato Di Tella · Buenos Aires, Argentina</div>
         </div>
         <div class="formation-years">2022 — 2025</div>
       </div>
       <div class="formation-sub">
         <div>
-          <div class="formation-degree">Programa de Intercambio</div>
-          <div class="formation-inst">Erasmus Universiteit · Rotterdam, Países Bajos</div>
+          <div class="formation-degree" data-i18n="about.degree.2">Programa de Intercambio</div>
+          <div class="formation-inst" data-i18n="about.inst.2">Erasmus Universiteit · Rotterdam, Países Bajos</div>
         </div>
         <div class="formation-years">Ago. 2024 — Feb. 2025</div>
       </div>
@@ -500,8 +519,8 @@
     <div class="formation-item">
       <div class="formation-row">
         <div>
-          <div class="formation-degree">Bachiller Bilingüe en Ciencias Sociales y Humanidades</div>
-          <div class="formation-inst">Colegio San Agustín · Buenos Aires, Argentina</div>
+          <div class="formation-degree" data-i18n="about.degree.3">Bachiller Bilingüe en Ciencias Sociales y Humanidades</div>
+          <div class="formation-inst" data-i18n="about.inst.3">Colegio San Agustín · Buenos Aires, Argentina</div>
         </div>
         <div class="formation-years">2009 — 2021</div>
       </div>
@@ -510,11 +529,11 @@
 </section>
 
 <section class="skills-section">
-  <div class="section-label">Habilidades</div>
+  <div class="section-label" data-i18n="about.section.skills">Habilidades</div>
   <div class="skills-grid">
     <div>
       <div class="reveal">
-        <div class="skills-group-title">Herramientas</div>
+        <div class="skills-group-title" data-i18n="about.skills.tools">Herramientas</div>
         <div class="skill-tags">
           <span class="skill-tag dim">Adobe Illustrator</span>
           <span class="skill-tag dim">Adobe Photoshop</span>
@@ -531,27 +550,27 @@
         </div>
       </div>
       <div class="reveal" style="margin-top:48px">
-        <div class="skills-group-title">Idiomas</div>
-        <div class="lang-item"><span class="lang-name">Español</span><span class="lang-level">Nativo</span></div>
-        <div class="lang-item"><span class="lang-name">Inglés</span><span class="lang-level">C2 · Cambridge</span></div>
+        <div class="skills-group-title" data-i18n="about.skills.languages">Idiomas</div>
+        <div class="lang-item"><span class="lang-name" data-i18n="about.lang.es">Español</span><span class="lang-level" data-i18n="about.lang.level.native">Nativo</span></div>
+        <div class="lang-item"><span class="lang-name" data-i18n="about.lang.en">Inglés</span><span class="lang-level">C2 · Cambridge</span></div>
       </div>
     </div>
     <div>
       <div class="reveal">
-        <div class="skills-group-title">Intereses</div>
+        <div class="skills-group-title" data-i18n="about.skills.interests">Intereses</div>
         <div class="skill-tags">
-          <span class="skill-tag">El cine</span>
-          <span class="skill-tag">La naturaleza</span>
-          <span class="skill-tag">Aprender</span>
-          <span class="skill-tag">La digitalidad</span>
-          <span class="skill-tag">La música</span>
-          <span class="skill-tag">Viajar</span>
-          <span class="skill-tag">Explorar</span>
-          <span class="skill-tag">La fotografía</span>
-          <span class="skill-tag">La cultura</span>
-          <span class="skill-tag">Dibujar</span>
-          <span class="skill-tag">Editar videos</span>
-          <span class="skill-tag">El arte</span>
+          <span class="skill-tag" data-i18n="interest.cine">El cine</span>
+          <span class="skill-tag" data-i18n="interest.naturaleza">La naturaleza</span>
+          <span class="skill-tag" data-i18n="interest.aprender">Aprender</span>
+          <span class="skill-tag" data-i18n="interest.digitalidad">La digitalidad</span>
+          <span class="skill-tag" data-i18n="interest.musica">La música</span>
+          <span class="skill-tag" data-i18n="interest.viajar">Viajar</span>
+          <span class="skill-tag" data-i18n="interest.explorar">Explorar</span>
+          <span class="skill-tag" data-i18n="interest.fotografia">La fotografía</span>
+          <span class="skill-tag" data-i18n="interest.cultura">La cultura</span>
+          <span class="skill-tag" data-i18n="interest.dibujar">Dibujar</span>
+          <span class="skill-tag" data-i18n="interest.videos">Editar videos</span>
+          <span class="skill-tag" data-i18n="interest.arte">El arte</span>
         </div>
       </div>
     </div>
@@ -564,9 +583,9 @@
 
 <div class="contact-fab" id="contactFab">
   <div class="contact-panel">
-    <div class="panel-header"><div class="panel-title">Contacto</div></div>
+    <div class="panel-header"><div class="panel-title" data-i18n="fab.panel.title">Contacto</div></div>
     <a href="mailto:ramiro.gallo@outlook.com" class="panel-row">
-      <span class="panel-row-type">Correo</span>
+      <span class="panel-row-type" data-i18n="fab.panel.email">Correo</span>
       <span class="panel-row-value">ramiro.gallo@outlook.com</span>
       <span class="panel-arrow">→</span>
     </a>
@@ -576,12 +595,12 @@
       <span class="panel-arrow">→</span>
     </a>
     <a href="tel:+5491136318967" class="panel-row">
-      <span class="panel-row-type">Teléfono</span>
+      <span class="panel-row-type" data-i18n="fab.panel.phone">Teléfono</span>
       <span class="panel-row-value">+54 9 11 3631 8967</span>
       <span class="panel-arrow">→</span>
     </a>
   </div>
-  <button class="fab-btn" id="fabBtn">¿Trabajamos juntos?</button>
+  <button class="fab-btn" id="fabBtn" data-i18n="fab.cta">¿Trabajamos juntos?</button>
 </div>
 
 <script>
